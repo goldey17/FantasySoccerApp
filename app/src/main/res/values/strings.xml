@@ -1,6 +1,19 @@
 <resources>
+    <!--Strings for the app-->
     <string name="app_name">FantasySoccerApp</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Stings for first_activity-->
+    <string name="select_team">Select Team:</string>
+    <string name="add_player">Add Player</string>
+    <string name="add_team">Add Team</string>
+    <!--Strings for the player positions-->
+    <string name="position_defense">Position: Defense</string>
+    <string name="position_goalie">Position: Goalie</string>
+    <string name="position_forward">Position: Forward</string>
+    <string name="position_mid">Position: Mid-Field</string>
+    <string name="title_activity_second_activity">second_activity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
 </resources>
