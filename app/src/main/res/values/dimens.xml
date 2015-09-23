@@ -1,11 +1,22 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">8dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
 
     <dimen name="first_activity_button_padding">10dp</dimen>
     <dimen name="first_activity_large_text_size">20sp</dimen>
     <dimen name="first_activity_small_text_size">15sp</dimen>
-    <dimen name="first_activity_image_size">150dp</dimen>
-    <dimen name="first_activity_image_padding_left">60dp</dimen>
+    <dimen name="first_activity_image_size">140dp</dimen>
+    <dimen name="first_activity_image_padding_left">10dp</dimen>
+
+    <dimen name="second_activity_button_padding">5dp</dimen>
+    <dimen name="second_activity_team_width">580dp</dimen>
+    <dimen name="second_activity_spinner_width">300dp</dimen>
+    <dimen name="second_activity_spinner_height">50dp</dimen>
+
+    <dimen name="dropdown_popup_width">300dp</dimen>
+    <dimen name="dropdown_popup_padding">10dp</dimen>
+    <dimen name="dropdown_popup_text_width">30sp</dimen>
+    <dimen name="dropdown_popup_space_dimension">50dp</dimen>
+
 </resources>
