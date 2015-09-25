@@ -13,6 +13,7 @@
     <string name="player_name">Player Name</string>
     <string name="goToTeamRosters">Go To Team Rosters</string>
     <string name="playGame">Play A Game</string>
+    <string name="teamStats">Team Stats</string>
 
     <!--Stings for second activity-->
     <string name="team_one">Team One:</string>

@@ -54,335 +54,174 @@ to second activity or third activity.-->
             android:id="@+id/removePlayerButton"
             android:padding="@dimen/first_activity_button_padding"
             android:textSize="@dimen/first_activity_large_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/teamStats"
+            android:id="@+id/teamStatsButton"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/player1Layout"
-        android:layout_below="@+id/optionButtons"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/first_activity_button_padding">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player1Image"
-            android:src="@drawable/player1_cats"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/player1Name"
-            android:text="@string/player_name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player1StatsButton" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player2Layout"
-        android:layout_alignTop="@+id/player1Layout"
-        android:layout_toRightOf="@+id/player1Layout"
-        android:layout_toEndOf="@+id/player1Layout"
-        android:layout_marginLeft="@dimen/first_activity_image_padding_left">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player2Image"
-            android:src="@drawable/player2_cats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player2Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player2StatsButton" />
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:id="@+id/player3Layout"
-        android:layout_above="@+id/player6Layout"
-        android:layout_toRightOf="@+id/player2Layout"
-        android:layout_toEndOf="@+id/player2Layout"
-        android:layout_marginLeft="@dimen/first_activity_image_padding_left">
-
-            <ImageView
-                android:layout_width="@dimen/first_activity_image_size"
-                android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player3Image"
-                android:src="@drawable/player3_cats" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/player_name"
-                android:id="@+id/player3Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player3StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:id="@+id/player4Layout"
-        android:layout_alignTop="@+id/player3Layout"
-        android:layout_toRightOf="@+id/player3Layout"
-        android:layout_toEndOf="@+id/player3Layout"
-        android:layout_marginLeft="@dimen/first_activity_image_padding_left">
-
-            <ImageView
-                android:layout_width="@dimen/first_activity_image_size"
-                android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player4Image"
-                android:src="@drawable/player4_cats" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/player_name"
-                android:id="@+id/player4Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player4StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player5Layout"
-        android:layout_below="@+id/optionButtons"
-        android:layout_toRightOf="@+id/player4Layout"
-        android:layout_toEndOf="@+id/player4Layout"
-        android:layout_marginLeft="@dimen/first_activity_image_padding_left">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player5Image"
-            android:src="@drawable/player5_cats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player5Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player5StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:id="@+id/player6Layout"
-        android:layout_below="@+id/player1Layout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/first_activity_image_padding_left">
-
-            <ImageView
-                android:layout_width="@dimen/first_activity_image_size"
-                android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player6Image"
-                android:src="@drawable/player6_cats" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/player_name"
-                android:id="@+id/player6Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player6StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:id="@+id/player7Layout"
-        android:layout_alignTop="@+id/player6Layout"
-        android:layout_alignLeft="@+id/player2Layout"
-        android:layout_alignStart="@+id/player2Layout">
-
-            <ImageView
-                android:layout_width="@dimen/first_activity_image_size"
-                android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player7Image"
-                android:src="@drawable/player7_cats" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/player_name"
-                android:id="@+id/player7Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player7StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player8Layout"
-        android:layout_alignTop="@+id/player7Layout"
-        android:layout_alignLeft="@+id/player3Layout"
-        android:layout_alignStart="@+id/player3Layout">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player8Image"
-            android:src="@drawable/player8_cats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player8Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player8StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player9Layout"
-        android:layout_alignTop="@+id/player8Layout"
-        android:layout_alignLeft="@+id/player4Layout"
-        android:layout_alignStart="@+id/player4Layout">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player9Image"
-            android:src="@drawable/player9_cats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player9Name" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player9StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player10Layout"
-        android:layout_alignTop="@+id/player9Layout"
-        android:layout_alignLeft="@+id/player5Layout"
-        android:layout_alignStart="@+id/player5Layout">
-
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player10Image"
-            android:src="@drawable/player10_cats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player10Name"
-            android:singleLine="false" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player10StatsButton" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player11Layout"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/playerLayout">
 
-        <ImageView
-            android:layout_width="@dimen/first_activity_image_size"
-            android:layout_height="@dimen/first_activity_image_size"
-            android:id="@+id/player11Image"
-            android:src="@drawable/player11_cats" />
-
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/player_name"
-            android:id="@+id/player11Name"
-            android:singleLine="false" />
+            android:id="@+id/player1Layout"
+            android:layout_below="@+id/optionButtons"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/first_activity_button_padding">
 
-        <Button
+            <ImageView
+                android:layout_width="@dimen/first_activity_image_size"
+                android:layout_height="@dimen/first_activity_image_size"
+                android:id="@+id/player1Image"
+                android:src="@drawable/player1_cats"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/player1Name"
+                android:text="@string/player_name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats"
+                android:id="@+id/player1StatsButton" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/player11StatsButton" />
+            android:id="@+id/player2Layout"
+            android:layout_alignTop="@+id/player1Layout"
+            android:layout_toRightOf="@+id/player1Layout"
+            android:layout_toEndOf="@+id/player1Layout"
+            android:layout_marginLeft="@dimen/first_activity_image_padding_left">
+
+            <ImageView
+                android:layout_width="@dimen/first_activity_image_size"
+                android:layout_height="@dimen/first_activity_image_size"
+                android:id="@+id/player2Image"
+                android:src="@drawable/player2_cats" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/player_name"
+                android:id="@+id/player2Name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats"
+                android:id="@+id/player2StatsButton" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            android:id="@+id/player3Layout"
+            android:layout_toRightOf="@+id/player2Layout"
+            android:layout_toEndOf="@+id/player2Layout"
+            android:layout_marginLeft="@dimen/first_activity_image_padding_left">
+
+                <ImageView
+                    android:layout_width="@dimen/first_activity_image_size"
+                    android:layout_height="@dimen/first_activity_image_size"
+                    android:id="@+id/player3Image"
+                    android:src="@drawable/player3_cats" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/player_name"
+                    android:id="@+id/player3Name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats"
+                android:id="@+id/player3StatsButton" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            android:id="@+id/player4Layout"
+            android:layout_alignTop="@+id/player3Layout"
+            android:layout_toRightOf="@+id/player3Layout"
+            android:layout_toEndOf="@+id/player3Layout"
+            android:layout_marginLeft="@dimen/first_activity_image_padding_left">
+
+                <ImageView
+                    android:layout_width="@dimen/first_activity_image_size"
+                    android:layout_height="@dimen/first_activity_image_size"
+                    android:id="@+id/player4Image"
+                    android:src="@drawable/player4_cats" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/player_name"
+                    android:id="@+id/player4Name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats"
+                android:id="@+id/player4StatsButton" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player5Layout"
+            android:layout_below="@+id/optionButtons"
+            android:layout_toRightOf="@+id/player4Layout"
+            android:layout_toEndOf="@+id/player4Layout"
+            android:layout_marginLeft="@dimen/first_activity_image_padding_left">
+
+            <ImageView
+                android:layout_width="@dimen/first_activity_image_size"
+                android:layout_height="@dimen/first_activity_image_size"
+                android:id="@+id/player5Image"
+                android:src="@drawable/player5_cats" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/player_name"
+                android:id="@+id/player5Name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats"
+                android:id="@+id/player5StatsButton" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -394,8 +233,8 @@ to second activity or third activity.-->
         android:textSize="@dimen/first_activity_small_text_size"
         android:text="@string/playGame"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/goToSecondActivity"
-        android:layout_toStartOf="@+id/goToSecondActivity" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
