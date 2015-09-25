@@ -2,6 +2,7 @@
     <!--Strings for the app-->
     <string name="app_name">FantasySoccerApp</string>
     <string name="action_settings">Settings</string>
+    <string name="goBack">Go Back</string>
 
     <!--Stings for first activity-->
     <string name="select_team">Select Team</string>
@@ -36,13 +37,12 @@
     <string name="position">Position</string>
     <string name="mostGoals">Most Goals</string>
 
-
     <!--Strings for dropdown Popup Layout-->
     <string name="dropdownPopupTitle">Title</string>
     <string name="cancel">Cancel</string>
     <string name="enter">Enter</string>
 
-    <!--Strings for dropdown Popup Layout-->
+    <!--Strings for text Popup Layout-->
     <string name="textPopupTitle">Title</string>
     <string name="enter_text_here">Enter Text Here</string>
 
@@ -57,7 +57,6 @@
     <string name="redcards">Red Cards</string>
     <string name="goalssaved">Goals Saved</string>
     <string name="fouls">Fouls</string>
-
 
     <!--Strings for the player positions-->
     <string name="position_defense">Position: Defense</string>
