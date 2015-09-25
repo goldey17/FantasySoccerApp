@@ -77,9 +77,6 @@ to second activity or third activity.-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player1Layout"
-            android:layout_below="@+id/optionButtons"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/first_activity_button_padding">
 
             <ImageView
@@ -108,9 +105,6 @@ to second activity or third activity.-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player2Layout"
-            android:layout_alignTop="@+id/player1Layout"
-            android:layout_toRightOf="@+id/player1Layout"
-            android:layout_toEndOf="@+id/player1Layout"
             android:layout_marginLeft="@dimen/first_activity_image_padding_left">
 
             <ImageView
@@ -139,8 +133,6 @@ to second activity or third activity.-->
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
             android:id="@+id/player3Layout"
-            android:layout_toRightOf="@+id/player2Layout"
-            android:layout_toEndOf="@+id/player2Layout"
             android:layout_marginLeft="@dimen/first_activity_image_padding_left">
 
                 <ImageView
@@ -164,13 +156,10 @@ to second activity or third activity.-->
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/player4Layout"
-            android:layout_alignTop="@+id/player3Layout"
-            android:layout_toRightOf="@+id/player3Layout"
-            android:layout_toEndOf="@+id/player3Layout"
             android:layout_marginLeft="@dimen/first_activity_image_padding_left">
 
                 <ImageView
@@ -198,9 +187,6 @@ to second activity or third activity.-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player5Layout"
-            android:layout_below="@+id/optionButtons"
-            android:layout_toRightOf="@+id/player4Layout"
-            android:layout_toEndOf="@+id/player4Layout"
             android:layout_marginLeft="@dimen/first_activity_image_padding_left">
 
             <ImageView
@@ -228,7 +214,6 @@ to second activity or third activity.-->
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/goToThirdActivity"
-        android:layout_column="3"
         android:layout_gravity="center"
         android:textSize="@dimen/first_activity_small_text_size"
         android:text="@string/playGame"
@@ -236,25 +221,43 @@ to second activity or third activity.-->
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/goToSecondActivity"
-        android:layout_column="3"
-        android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:textSize="@dimen/first_activity_small_text_size"
-        android:text="@string/goToTeamRosters" />
-
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/teamLogo"
         android:src="@drawable/cats_logo"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/goToSecondActivity"
-        android:layout_alignEnd="@+id/goToSecondActivity" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sortByLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/sortBy"
+            android:id="@+id/sortByText" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/position"
+            android:id="@+id/posistionSort" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mostGoals"
+            android:id="@+id/mostGoalsSort" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,12 +1,10 @@
 package com.example.administrator.fantasysoccerapp;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,7 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 
-public class first_activity extends ActionBarActivity implements View.OnClickListener{
+public class first_activity extends AppCompatActivity implements View.OnClickListener{
 
     //Initialize all Buttons
     Button selectTeam;
@@ -28,7 +26,6 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
     Button player4Stats;
     Button player5Stats;
     Button playGame;
-    Button goToTeamRoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +43,6 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
         player4Stats = (Button)findViewById(R.id.player4StatsButton);
         player5Stats = (Button)findViewById(R.id.player5StatsButton);
         playGame = (Button)findViewById(R.id.goToThirdActivity);
-        goToTeamRoster = (Button)findViewById(R.id.goToSecondActivity);
 
         //Set on click listeners for the popup generating buttons
         selectTeam.setOnClickListener(this);
@@ -62,17 +58,9 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
         playGame.setOnClickListener(this);
     }//onCreate
 
-
-    private void moveToThirdActivity() {
-
-    }
-
-
     @Override
     public void onClick(View view) {
         if (view == playGame){
-            startActivity(new Intent(first_activity.this,second_activity.class));
-        }else if (view == goToTeamRoster){
             startActivity(new Intent(first_activity.this,third_activity.class));
         }else {
             LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -92,16 +80,19 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
             //Fills in the title of the popup depending on button clicked
-            TextView title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
+            TextView title;
             if (view == selectTeam) {
+                title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
                 title.setText("Pick Team");
             } else if (view == addTeam) {
+                title = (TextView) popupView.findViewById(R.id.textPopupTitle);
                 title.setText("Add Team");
             } else if (view == addPlayer) {
+                title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
                 title.setText("Add Player");
             } else if (view == removePlayer) {
+                title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
                 title.setText("Remove Player");
-            } else {
             }
 
             //Populates the dropdown based on button clicked
@@ -113,9 +104,15 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
 
             }
 
-
             //Dismisses the popup when the cancel button is clicked
-            Button btnDismiss = (Button) popupView.findViewById(R.id.dropdownPopupCancel);
+            Button btnDismiss;
+            if (view == addTeam) {
+                btnDismiss = (Button) popupView.findViewById(R.id.textPopupCancel);
+            } else if (view == selectTeam || view == addPlayer || view == removePlayer) {
+                btnDismiss = (Button) popupView.findViewById(R.id.dropdownPopupCancel);
+            } else {
+                btnDismiss = (Button) popupView.findViewById(R.id.statsPopupCancel);
+            }
             btnDismiss.setOnClickListener(new Button.OnClickListener() {
 
                 @Override
@@ -125,13 +122,21 @@ public class first_activity extends ActionBarActivity implements View.OnClickLis
             });
 
             //Saves data and leaves popup when enter button is pressed
-            Button tradePlayerButton = (Button) popupView.findViewById(R.id.dropdownPopupEnter);
-            tradePlayerButton.setOnClickListener(new View.OnClickListener() {
+            Button btnSave;
+            if (view == addTeam) {
+                btnSave = (Button) popupView.findViewById(R.id.textPopupCancel);
+            } else if (view == selectTeam || view == addPlayer || view == removePlayer) {
+                btnSave = (Button) popupView.findViewById(R.id.dropdownPopupCancel);
+            } else {
+                btnSave = (Button) popupView.findViewById(R.id.statsPopupCancel);
+            }
+            btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     popupWindow.dismiss();
                 }
             });
         }
-    }
+    }//onClick
+
 }//first_activity
