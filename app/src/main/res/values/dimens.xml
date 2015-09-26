@@ -9,6 +9,7 @@
     <dimen name="first_activity_small_text_size">15sp</dimen>
     <dimen name="first_activity_image_size">140dp</dimen>
     <dimen name="first_activity_image_padding_left">10dp</dimen>
+    <dimen name="first_activity_super_large_text_size">100sp</dimen>
 
     <!-- Dimensions for the second activity. -->
     <dimen name="second_activity_button_padding">5dp</dimen>

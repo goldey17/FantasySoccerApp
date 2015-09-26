@@ -32,10 +32,11 @@
             android:text="@string/goals"
             android:id="@+id/goalsText" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/goalsValue" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +52,7 @@
             android:text="@string/goalssaved"
             android:id="@+id/goalsSavedText" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/goalsSavedValue" />
@@ -70,7 +71,7 @@
             android:text="@string/assists"
             android:id="@+id/assistsText" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/assistsValue" />
@@ -89,7 +90,7 @@
             android:text="@string/fouls"
             android:id="@+id/foulsText" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foulsValue" />
@@ -108,10 +109,11 @@
             android:text="@string/yellowcards"
             android:id="@+id/yellowCardsText" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/yellowCardsValue" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -127,10 +129,30 @@
             android:text="@string/redcards"
             android:id="@+id/redCardsText" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/redCardsValue" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/posistionLayout" >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/redCardValue" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/position"
+            android:id="@+id/posistionText" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/posistionValue" />
     </LinearLayout>
 
     <LinearLayout

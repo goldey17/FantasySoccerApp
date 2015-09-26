@@ -20,13 +20,13 @@ button..-->
         android:textStyle="bold"
         android:gravity="center_horizontal" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textPopupTextField"
-        android:textSize="@dimen/dropdown_popup_text_width"
         android:gravity="center_horizontal"
-        android:text="@string/enter_text_here" />
+        android:text="@string/enter_text_here"
+        android:textSize="@dimen/dropdown_popup_text_width" />
 
     <LinearLayout
         android:orientation="horizontal"

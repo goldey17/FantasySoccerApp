@@ -26,14 +26,6 @@ to second activity or third activity.-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/select_team"
-            android:id="@+id/selectTeamButton"
-            android:padding="@dimen/first_activity_button_padding"
-            android:textSize="@dimen/first_activity_large_text_size" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:text="@string/add_team"
             android:id="@+id/addTeamButton"
             android:padding="@dimen/first_activity_button_padding"
@@ -76,14 +68,12 @@ to second activity or third activity.-->
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/player1Layout"
-            android:layout_marginTop="@dimen/first_activity_button_padding">
+            android:id="@+id/player1Layout">
 
             <ImageView
                 android:layout_width="@dimen/first_activity_image_size"
                 android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player1Image"
-                android:src="@drawable/player1_cats"/>
+                android:id="@+id/player1Image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,8 +100,7 @@ to second activity or third activity.-->
             <ImageView
                 android:layout_width="@dimen/first_activity_image_size"
                 android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player2Image"
-                android:src="@drawable/player2_cats" />
+                android:id="@+id/player2Image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,8 +127,7 @@ to second activity or third activity.-->
                 <ImageView
                     android:layout_width="@dimen/first_activity_image_size"
                     android:layout_height="@dimen/first_activity_image_size"
-                    android:id="@+id/player3Image"
-                    android:src="@drawable/player3_cats" />
+                    android:id="@+id/player3Image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -165,8 +153,7 @@ to second activity or third activity.-->
                 <ImageView
                     android:layout_width="@dimen/first_activity_image_size"
                     android:layout_height="@dimen/first_activity_image_size"
-                    android:id="@+id/player4Image"
-                    android:src="@drawable/player4_cats" />
+                    android:id="@+id/player4Image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -192,8 +179,7 @@ to second activity or third activity.-->
             <ImageView
                 android:layout_width="@dimen/first_activity_image_size"
                 android:layout_height="@dimen/first_activity_image_size"
-                android:id="@+id/player5Image"
-                android:src="@drawable/player5_cats" />
+                android:id="@+id/player5Image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -225,7 +211,6 @@ to second activity or third activity.-->
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/teamLogo"
-        android:src="@drawable/cats_logo"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -258,6 +243,60 @@ to second activity or third activity.-->
             android:text="@string/mostGoals"
             android:id="@+id/mostGoalsSort" />
 
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/teamName"
+        android:textSize="@dimen/first_activity_super_large_text_size"
+        android:layout_below="@+id/teamLogo"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/teamChoiceLayout"
+        android:layout_below="@+id/optionButtons"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/team1name"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/team2name"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/team3name"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/team4name"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/team5name"
+            android:padding="@dimen/first_activity_button_padding"
+            android:textSize="@dimen/first_activity_large_text_size" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -14,25 +14,28 @@ public class SoccerPlayer {
     private String lastName;
     private String teamName;
     private String position;
-    private int goalsScored;
-    private int goalsSaved;
-    private int yellowCards;
-    private int redCards;
-    private int fouls;
-    private int assists;
+    private int picture;
+    private String goalsScored;
+    private String goalsSaved;
+    private String yellowCards;
+    private String redCards;
+    private String fouls;
+    private String assists;
 
     //Constructor to create a Soccer Player
-    public SoccerPlayer (String newFirstName, String newLastName, String newTeamName, String newPosition){
+    public SoccerPlayer (String newFirstName, String newLastName, String newTeamName,
+                         String newPosition, int newPicture){
         firstName = newFirstName;
         lastName = newLastName;
         teamName = newTeamName;
         position = newPosition;
-        goalsScored = 0;
-        goalsSaved = 0;
-        yellowCards = 0;
-        redCards = 0;
-        fouls = 0;
-        assists = 0;
+        picture = newPicture;
+        goalsScored = "0";
+        goalsSaved = "0";
+        yellowCards = "0";
+        redCards = "0";
+        fouls = "0";
+        assists = "0";
     }
 
     //Get methods to access the instance variables
@@ -52,27 +55,29 @@ public class SoccerPlayer {
         return position;
     }
 
-    public int getGoalsScored(){
+    public int getPicture(){return picture;}
+
+    public String getGoalsScored(){
         return goalsScored;
     }
 
-    public int getGoalsSaved(){
+    public String getGoalsSaved(){
         return goalsSaved;
     }
 
-    public int getYellowCards(){
+    public String getYellowCards(){
         return yellowCards;
     }
 
-    public int getRedCards(){
+    public String getRedCards(){
         return redCards;
     }
 
-    public int getFouls(){
+    public String getFouls(){
         return fouls;
     }
 
-    public int getAssists(){
+    public String getAssists(){
         return assists;
     }
 
@@ -94,28 +99,28 @@ public class SoccerPlayer {
     }
 
     //Increase methods to increase the int variables
-    public void increaseGoalsScored(){
-        goalsScored++;
+    public void increaseGoalsScored(String newValue){
+        goalsScored = newValue;
     }
 
-    public void increaseGoalsSaved(){
-        goalsSaved++;
+    public void increaseGoalsSaved(String newValue){
+        goalsSaved = newValue;
     }
 
-    public void increaseYellowCards(){
-        yellowCards++;
+    public void increaseYellowCards(String newValue){
+        yellowCards = newValue;
     }
 
-    public void increaseRedCards(){
-        redCards++;
+    public void increaseRedCards(String newValue){
+        redCards = newValue;
     }
 
-    public void increaseFouls(){
-        fouls++;
+    public void increaseFouls(String newValue){
+        fouls = newValue;
     }
 
-    public void increaseAssists(){
-        assists++;
+    public void increaseAssists(String newValue){
+        assists = newValue;
     }
 
 }
