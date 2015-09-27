@@ -3,11 +3,14 @@ package com.example.administrator.fantasysoccerapp;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +27,6 @@ import java.util.Hashtable;
 public class first_activity extends AppCompatActivity implements View.OnClickListener{
 
     //Initialize all Buttons
-    Button addTeam;
     Button addPlayer;
     Button removePlayer;
     Button teamStats;
@@ -34,11 +36,14 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     Button player4Stats;
     Button player5Stats;
     Button playGame;
+    Button playerMenu;
     Button team1Name;
     Button team2Name;
     Button team3Name;
     Button team4Name;
     Button team5Name;
+    Button saveTeam;
+    Button savePlayer;
 
     //Initialize all textviews
     TextView teamName;
@@ -56,6 +61,11 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     ImageView player5Image;
     ImageView teamLogo;
 
+    //Initialize edit text
+    EditText editableTeamName;
+    EditText editablePlayerName;
+
+
 
     @Override
     //Used for all button clicks associated with a popup
@@ -64,9 +74,6 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_first_activity);
 
         //Initialize buttons
-        addTeam = (Button)findViewById(R.id.addTeamButton);
-        addPlayer = (Button)findViewById(R.id.addPlayerButton);
-        removePlayer = (Button)findViewById(R.id.removePlayerButton);
         teamStats =(Button)findViewById(R.id.teamStatsButton);
         player1Stats = (Button)findViewById(R.id.player1StatsButton);
         player2Stats = (Button)findViewById(R.id.player2StatsButton);
@@ -79,6 +86,9 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         team4Name = (Button)findViewById(R.id.team4name);
         team5Name = (Button)findViewById(R.id.team5name);
         playGame = (Button)findViewById(R.id.goToThirdActivity);
+        playerMenu = (Button)findViewById(R.id.goToSecondActivity);
+        saveTeam = (Button)findViewById(R.id.saveTeam);
+        savePlayer = (Button)findViewById(R.id.savePlayer);
 
         //Initialize text
         teamName = (TextView)findViewById(R.id.teamName);
@@ -96,10 +106,11 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         player5Image = (ImageView)findViewById(R.id.player5Image);
         teamLogo = (ImageView)findViewById(R.id.teamLogo);
 
+        //Initialize edit text
+        editableTeamName = (EditText)findViewById(R.id.enterTeamName);
+        editablePlayerName = (EditText)findViewById(R.id.enterPlayerName);
+
         //Set on click listeners for the popup generating buttons
-        addTeam.setOnClickListener(this);
-        addPlayer.setOnClickListener(this);
-        removePlayer.setOnClickListener(this);
         teamStats.setOnClickListener(this);
         player1Stats.setOnClickListener(this);
         player2Stats.setOnClickListener(this);
@@ -107,6 +118,9 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         player4Stats.setOnClickListener(this);
         player5Stats.setOnClickListener(this);
         playGame.setOnClickListener(this);
+        playerMenu.setOnClickListener(this);
+        saveTeam.setOnClickListener(this);
+        savePlayer.setOnClickListener(this);
 
         //Set on click listeners for team buttons
         team1Name.setOnClickListener(this);
@@ -115,38 +129,55 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         team4Name.setOnClickListener(this);
         team5Name.setOnClickListener(this);
 
-
         //Create default database
         SoccerDB.createDefaultDatabase();
 
         //Set all the data on the page
         setTeamButtons();
-        setPlayerNames("Kittenz");
-        setPlayerImages("Kittenz");
-        setTeamLogo("Kittenz");
+        setPlayerInfo("Kittenz");
 
     }//onCreate
 
-    private void setTeamLogo(String teamName) {
-        teamLogo.setBackgroundResource(SoccerDB.returnTeamLogo(teamName));
-    }
-
-    private void setPlayerNames(String teamName) {
-        ArrayList<SoccerPlayer> players = SoccerDB.getPlayers(teamName);
-        if (SoccerDB.getNumberOfPlayers(teamName) == 0) {
+    //Sets all the information relating to the  player on the screen, including hiding the ones that
+    //aren't needed
+    private void setPlayerInfo(String tempTeamName) {
+        teamLogo.setBackgroundResource(SoccerDB.returnTeamLogo(tempTeamName));
+        teamName.setText(tempTeamName);
+        ArrayList<SoccerPlayer> players = SoccerDB.getPlayers(tempTeamName);
+        if (SoccerDB.getNumberOfPlayers(tempTeamName) == 0) {
             player1Name.setVisibility(View.GONE);
             player2Name.setVisibility(View.GONE);
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
-        }else if (SoccerDB.getNumberOfPlayers(teamName) == 1){
+            player1Image.setVisibility(View.GONE);
+            player2Image.setVisibility(View.GONE);
+            player3Image.setVisibility(View.GONE);
+            player4Image.setVisibility(View.GONE);
+            player5Image.setVisibility(View.GONE);
+            player1Stats.setVisibility(View.GONE);
+            player2Stats.setVisibility(View.GONE);
+            player3Stats.setVisibility(View.GONE);
+            player4Stats.setVisibility(View.GONE);
+            player5Stats.setVisibility(View.GONE);
+        }else if (SoccerDB.getNumberOfPlayers(tempTeamName) == 1){
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             player1Name.setText(player1);
             player2Name.setVisibility(View.GONE);
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
-        }else if (SoccerDB.getNumberOfPlayers(teamName) == 2) {
+            int player1Im = (players.get(0).getPicture());
+            player1Image.setBackgroundResource(player1Im);
+            player2Image.setVisibility(View.GONE);
+            player3Image.setVisibility(View.GONE);
+            player4Image.setVisibility(View.GONE);
+            player5Image.setVisibility(View.GONE);
+            player2Stats.setVisibility(View.GONE);
+            player3Stats.setVisibility(View.GONE);
+            player4Stats.setVisibility(View.GONE);
+            player5Stats.setVisibility(View.GONE);
+        }else if (SoccerDB.getNumberOfPlayers(tempTeamName) == 2) {
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             String player2 = (players.get(1).getFirstName() + " " + players.get(1).getLastName());
             player1Name.setText(player1);
@@ -154,7 +185,17 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
-        }else if(SoccerDB.getNumberOfPlayers(teamName) == 3){
+            int player1Im = (players.get(0).getPicture());
+            int player2Im = (players.get(1).getPicture());
+            player1Image.setBackgroundResource(player1Im);
+            player2Image.setBackgroundResource(player2Im);
+            player3Image.setVisibility(View.GONE);
+            player4Image.setVisibility(View.GONE);
+            player5Image.setVisibility(View.GONE);
+            player3Stats.setVisibility(View.GONE);
+            player4Stats.setVisibility(View.GONE);
+            player5Stats.setVisibility(View.GONE);
+        }else if(SoccerDB.getNumberOfPlayers(tempTeamName) == 3){
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             String player2 = (players.get(1).getFirstName() + " " + players.get(1).getLastName());
             String player3 = (players.get(2).getFirstName() + " " + players.get(2).getLastName());
@@ -163,7 +204,17 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setText(player3);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
-        }else if(SoccerDB.getNumberOfPlayers(teamName) == 4){
+            int player1Im = (players.get(0).getPicture());
+            int player2Im = (players.get(1).getPicture());
+            int player3Im = (players.get(2).getPicture());
+            player1Image.setBackgroundResource(player1Im);
+            player2Image.setBackgroundResource(player2Im);
+            player3Image.setBackgroundResource(player3Im);
+            player4Image.setVisibility(View.GONE);
+            player5Image.setVisibility(View.GONE);
+            player4Stats.setVisibility(View.GONE);
+            player5Stats.setVisibility(View.GONE);
+        }else if(SoccerDB.getNumberOfPlayers(tempTeamName) == 4){
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             String player2 = (players.get(1).getFirstName() + " " + players.get(1).getLastName());
             String player3 = (players.get(2).getFirstName() + " " + players.get(2).getLastName());
@@ -173,6 +224,16 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setText(player3);
             player4Name.setText(player4);
             player5Name.setVisibility(View.GONE);
+            int player1Im = (players.get(0).getPicture());
+            int player2Im = (players.get(1).getPicture());
+            int player3Im = (players.get(2).getPicture());
+            int player4Im = (players.get(3).getPicture());
+            player1Image.setBackgroundResource(player1Im);
+            player2Image.setBackgroundResource(player2Im);
+            player3Image.setBackgroundResource(player3Im);
+            player4Image.setBackgroundResource(player4Im);
+            player5Image.setVisibility(View.GONE);
+            player5Stats.setVisibility(View.GONE);
         }else{
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             String player2 = (players.get(1).getFirstName() + " " + players.get(1).getLastName());
@@ -184,65 +245,21 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setText(player3);
             player4Name.setText(player4);
             player5Name.setText(player5);
+            int player1Im = (players.get(0).getPicture());
+            int player2Im = (players.get(1).getPicture());
+            int player3Im = (players.get(2).getPicture());
+            int player4Im = (players.get(3).getPicture());
+            int player5Im = (players.get(4).getPicture());
+            player1Image.setBackgroundResource(player1Im);
+            player2Image.setBackgroundResource(player2Im);
+            player3Image.setBackgroundResource(player3Im);
+            player4Image.setBackgroundResource(player4Im);
+            player5Image.setBackgroundResource(player5Im);
         }
     }
 
-    private void setPlayerImages(String teamName) {
-        ArrayList<SoccerPlayer> players = SoccerDB.getPlayers(teamName);
-        if (SoccerDB.getNumberOfPlayers(teamName) == 0) {
-            player1Image.setVisibility(View.GONE);
-            player2Image.setVisibility(View.GONE);
-            player3Image.setVisibility(View.GONE);
-            player4Image.setVisibility(View.GONE);
-            player5Image.setVisibility(View.GONE);
-        }else if (SoccerDB.getNumberOfPlayers(teamName) == 1){
-            int player1 = (players.get(0).getPicture());
-            player1Image.setBackgroundResource(player1);
-            player2Image.setVisibility(View.GONE);
-            player3Image.setVisibility(View.GONE);
-            player4Image.setVisibility(View.GONE);
-            player5Image.setVisibility(View.GONE);
-        }else if (SoccerDB.getNumberOfPlayers(teamName) == 2) {
-            int player1 = (players.get(0).getPicture());
-            int player2 = (players.get(1).getPicture());
-            player1Image.setBackgroundResource(player1);
-            player2Image.setBackgroundResource(player2);
-            player3Image.setVisibility(View.GONE);
-            player4Image.setVisibility(View.GONE);
-            player5Image.setVisibility(View.GONE);
-        }else if(SoccerDB.getNumberOfPlayers(teamName) == 3){
-            int player1 = (players.get(0).getPicture());
-            int player2 = (players.get(1).getPicture());
-            int player3 = (players.get(2).getPicture());
-            player1Image.setBackgroundResource(player1);
-            player2Image.setBackgroundResource(player2);
-            player3Image.setBackgroundResource(player3);
-            player4Image.setVisibility(View.GONE);
-            player5Image.setVisibility(View.GONE);
-        }else if(SoccerDB.getNumberOfPlayers(teamName) == 4){
-            int player1 = (players.get(0).getPicture());
-            int player2 = (players.get(1).getPicture());
-            int player3 = (players.get(2).getPicture());
-            int player4 = (players.get(3).getPicture());
-            player1Image.setBackgroundResource(player1);
-            player2Image.setBackgroundResource(player2);
-            player3Image.setBackgroundResource(player3);
-            player4Image.setBackgroundResource(player4);
-            player5Image.setVisibility(View.GONE);
-        }else{
-            int player1 = (players.get(0).getPicture());
-            int player2 = (players.get(1).getPicture());
-            int player3 = (players.get(2).getPicture());
-            int player4 = (players.get(3).getPicture());
-            int player5 = (players.get(4).getPicture());
-            player1Image.setBackgroundResource(player1);
-            player2Image.setBackgroundResource(player2);
-            player3Image.setBackgroundResource(player3);
-            player4Image.setBackgroundResource(player4);
-            player5Image.setBackgroundResource(player5);
-        }
-    }
-
+    //Sets all the team buttons on the screen if there is less than 5 teams the team buttons
+    //are hidden
     private void setTeamButtons() {
         ArrayList<String> teams = SoccerDB.getListOfTeamNames();
         if (SoccerDB.getNumberOfTeams() == 2){
@@ -276,70 +293,54 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         if (view == playGame) {
             startActivity(new Intent(first_activity.this, third_activity.class));
+        }else if (view == playerMenu) {
+            startActivity(new Intent(first_activity.this, second_activity.class));
         }else if (view == team1Name){
-            setPlayerNames((String)team1Name.getText());
-            setPlayerImages((String) team1Name.getText());
-            setTeamLogo((String) team1Name.getText());
+            setPlayerInfo((String) team1Name.getText());
         }else if (view == team2Name){
-            setPlayerNames((String)team2Name.getText());
-            setPlayerImages((String) team2Name.getText());
-            setTeamLogo((String) team2Name.getText());
+            setPlayerInfo((String)team2Name.getText());
         }else if (view == team3Name){
-            setPlayerNames((String)team3Name.getText());
-            setPlayerImages((String) team3Name.getText());
-            setTeamLogo((String) team3Name.getText());
+            setPlayerInfo((String) team3Name.getText());
         }else if (view == team4Name){
-            setPlayerNames((String)team4Name.getText());
-            setPlayerImages((String) team4Name.getText());
-            setTeamLogo((String) team4Name.getText());
+            setPlayerInfo((String) team4Name.getText());
         }else if (view == team5Name){
-            setPlayerNames((String)team5Name.getText());
-            setPlayerImages((String) team5Name.getText());
-            setTeamLogo((String) team5Name.getText());
+            setPlayerInfo((String) team5Name.getText());
+        }else if (view == saveTeam){
+            String str = editableTeamName.getText().toString();
+            SoccerDB.addTeam(str);
+            setTeamButtons();
+            setPlayerInfo(str);
+        }else if (view == savePlayer) {
+            String str = editablePlayerName.getText().toString();
+            SoccerDB.addPlayer(str, teamName.getText().toString());
+            setPlayerInfo(teamName.getText().toString());
         }else {
             LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
             //Opens up the type of popup corresponding to the button clicked
-            View popupView;
-            if (view == addTeam) {
-                popupView = layoutInflater.inflate(R.layout.text_popup, null);
-            } else if (view == addPlayer || view == removePlayer) {
-                popupView = layoutInflater.inflate(R.layout.dropdown_popup, null);
-            } else {
-                popupView = layoutInflater.inflate(R.layout.stats_popup, null);
-            }
+            final View popupView = layoutInflater.inflate(R.layout.stats_popup, null);
 
             //Opens up the popup at the center of the screen
             final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-            //Fills in the title of the popup depending on button clicked
-            TextView title;
-            if (view == addTeam) {
-                title = (TextView) popupView.findViewById(R.id.textPopupTitle);
-                title.setText("Add Team");
-            }else if (view == addPlayer) {
-                title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
-                title.setText("Add Player");
-            }else if (view == removePlayer) {
-                title = (TextView) popupView.findViewById(R.id.dropdownPopupTitle);
-                title.setText("Remove Player");
-            }
-
-            //Populates the player stats popup
+            //Populates the player and team stats popup
             if (view == player1Stats || view == player2Stats || view == player3Stats ||
-                    view == player4Stats || view == player5Stats) {
-                String playerName;
+                    view == player4Stats || view == player5Stats || view == teamStats) {
+                String playerName = "";
+                String tempTeamName = "";
                 if (view == player1Stats){
                     playerName = (String) player1Name.getText();
                 }else if (view == player2Stats){
-                    playerName = (String) player1Name.getText();
+                    playerName = (String) player2Name.getText();
                 }else if (view == player3Stats){
-                    playerName = (String) player1Name.getText();
+                    playerName = (String) player3Name.getText();
                 }else if (view == player4Stats){
-                    playerName = (String) player1Name.getText();
+                    playerName = (String) player4Name.getText();
+                }else if (view == player5Stats){
+                    playerName = (String) player5Name.getText();
                 }else{
-                    playerName = (String) player1Name.getText();
+                    tempTeamName = (String) teamName.getText();
                 }
 
                 EditText goals = (EditText)popupView.findViewById(R.id.goalsValue);
@@ -349,37 +350,34 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                 EditText yellowcards = (EditText)popupView.findViewById(R.id.yellowCardsValue);
                 EditText redcards = (EditText)popupView.findViewById(R.id.redCardsValue);
                 EditText position = (EditText)popupView.findViewById(R.id.posistionValue);
-                title = (TextView)popupView.findViewById(R.id.statsPopupTitle);
-
-                SoccerPlayer player = SoccerDB.getPlayer(playerName);
-                title.setText(playerName);
-                goals.setText(player.getGoalsScored());
-                goalssaved.setText(player.getGoalsSaved());
-                assists.setText(player.getAssists());
-                fouls.setText(player.getFouls());
-                yellowcards.setText(player.getYellowCards());
-                redcards.setText(player.getRedCards());
-                position.setText(player.getPosition());
-            }
-
-
-            //Populates the dropdown based on button clicked
-            Spinner dropdown;
-            if (view == addPlayer) {
-
-            } else if (view == removePlayer) {
-
+                TextView title = (TextView)popupView.findViewById(R.id.statsPopupTitle);
+                if (tempTeamName.equals("")){
+                    SoccerPlayer player = SoccerDB.getPlayer(playerName);
+                    title.setText(playerName);
+                    goals.setText(player.getGoalsScored());
+                    goalssaved.setText(player.getGoalsSaved());
+                    assists.setText(player.getAssists());
+                    fouls.setText(player.getFouls());
+                    yellowcards.setText(player.getYellowCards());
+                    redcards.setText(player.getRedCards());
+                    position.setText(player.getPosition());
+                }else{
+                    SoccerTeam team = SoccerDB.getTeam(tempTeamName);
+                    title.setText(tempTeamName);
+                    goals.setText(team.getGoalsScored());
+                    goalssaved.setText(team.getGoalsSaved());
+                    assists.setText(team.getAssists());
+                    fouls.setText(team.getFouls());
+                    yellowcards.setText(team.getYellowCards());
+                    redcards.setText(team.getRedCards());
+                    position.setVisibility(view.GONE);
+                    TextView posistionLabel = (TextView)popupView.findViewById(R.id.posistionText);
+                    posistionLabel.setVisibility(view.GONE);
+                }
             }
 
             //Dismisses the popup when the cancel button is clicked
-            Button btnDismiss;
-            if (view == addTeam) {
-                btnDismiss = (Button) popupView.findViewById(R.id.textPopupCancel);
-            } else if (view == addPlayer || view == removePlayer) {
-                btnDismiss = (Button) popupView.findViewById(R.id.dropdownPopupCancel);
-            } else {
-                btnDismiss = (Button) popupView.findViewById(R.id.statsPopupCancel);
-            }
+            Button btnDismiss = (Button) popupView.findViewById(R.id.statsPopupCancel);
             btnDismiss.setOnClickListener(new Button.OnClickListener() {
 
                 @Override
@@ -387,23 +385,9 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                     popupWindow.dismiss();
                 }
             });
-
-            //Saves data and leaves popup when enter button is pressed
-            Button btnSave;
-            if (view == addTeam) {
-                btnSave = (Button) popupView.findViewById(R.id.textPopupCancel);
-            } else if (view == addPlayer || view == removePlayer) {
-                btnSave = (Button) popupView.findViewById(R.id.dropdownPopupCancel);
-            } else {
-                btnSave = (Button) popupView.findViewById(R.id.statsPopupCancel);
-            }
-            btnSave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    popupWindow.dismiss();
-                }
-            });
         }
     }//onClick
+
+
 
 }//first_activity

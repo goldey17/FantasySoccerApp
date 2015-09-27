@@ -98,8 +98,38 @@ public class SoccerDB {
         return player;
     }
 
+    public static SoccerTeam getTeam(String teamName) {
+        SoccerTeam team = teamDatabase.get(teamName);
+        return team;
+    }
+
     public static int returnTeamLogo(String teamName){
         SoccerTeam team = teamDatabase.get(teamName);
         return team.getTeamLogo();
+    }
+
+    public static void addTeam(String teamName){
+        SoccerTeam newTeam = new SoccerTeam(teamName, R.drawable.error_page_logo);
+        teamDatabase.put(teamName, newTeam);
+    }
+
+    public static void addPlayer(String playerName, String teamName){
+        SoccerPlayer newPlayer;
+        if (playerName.indexOf(" ") == -1){
+            newPlayer = new SoccerPlayer(playerName, "", teamName,"forward",R.drawable.error_page_logo);
+        }else{
+            newPlayer = new SoccerPlayer(playerName.substring(0,playerName.indexOf(" ")), playerName.substring(playerName.indexOf(" ")), teamName,"forward",R.drawable.error_page_logo);
+        }
+        playerDatabase.put(playerName,newPlayer);
+        SoccerTeam team = teamDatabase.get(teamName);
+        team.addPlayer(newPlayer);
+    }
+
+    public static boolean isTeam(String teamName){
+        return teamDatabase.containsKey(teamName);
+    }
+
+    public static boolean isPlayer(String playerName){
+        return playerDatabase.containsKey(playerName);
     }
 }

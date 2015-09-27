@@ -14,8 +14,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".third_activity" >
+        </activity>
         <activity
-            android:name=".third_activity">
+            android:name=".second_activity"
+            android:label="@string/title_activity_second_activity" >
         </activity>
     </application>
 

@@ -170,19 +170,6 @@
             android:textSize="@dimen/dropdown_popup_text_width"
             android:padding="@dimen/dropdown_popup_padding" />
 
-        <Space
-            android:layout_width="@dimen/dropdown_popup_space_dimension"
-            android:layout_height="@dimen/dropdown_popup_space_dimension"
-            android:id="@+id/statsPopupSpace" />
-
-        <Button
-            android:id="@+id/statsPopupEnter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/enter"
-            android:textSize="@dimen/dropdown_popup_text_width"
-            android:padding="@dimen/dropdown_popup_padding" />
-
     </LinearLayout>
 
 </LinearLayout>

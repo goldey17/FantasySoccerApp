@@ -3,6 +3,8 @@
     <string name="app_name">FantasySoccerApp</string>
     <string name="action_settings">Settings</string>
     <string name="goBack">Go Back</string>
+    <string name="title_activity_second_activity"></string>
+
 
     <!--Stings for first activity-->
     <string name="select_team">Select Team</string>
@@ -14,38 +16,19 @@
     <string name="goToTeamRosters">Go To Team Rosters</string>
     <string name="playGame">Play A Game</string>
     <string name="teamStats">Team Stats</string>
-
-    <!--Stings for second activity-->
-    <string name="team_one">Team One:</string>
-    <string name="team_two">Team Two:</string>
-    <string name="edit">Edit</string>
-    <string name="switch_team">Switch Team &#8212;&gt;</string>
-    <string name="switch_team_right"> &lt;&#8212; Switch Team</string>
-    <string name="player1">Player 1</string>
-    <string name="player2">Player 2</string>
-    <string name="player3">Player 3</string>
-    <string name="player4">Player 4</string>
-    <string name="player5">Player 5</string>
-    <string name="player6">Player 6</string>
-    <string name="player7">Player 7</string>
-    <string name="player8">Player 8</string>
-    <string name="player9">Player 9</string>
-    <string name="player10">Player 10</string>
-    <string name="player11">Player 11</string>
-    <string name="player12">Player 12</string>
-    <string name="name">Name</string>
+    <string name="saveName">Save</string>
+    <string name="enter_text_here">Enter</string>
     <string name="sortBy">Sort By:</string>
     <string name="position">Position</string>
     <string name="mostGoals">Most Goals</string>
+    <string name="playerEdit">Go to Player Edit menu</string>
 
-    <!--Strings for dropdown Popup Layout-->
-    <string name="dropdownPopupTitle">Title</string>
-    <string name="cancel">Cancel</string>
-    <string name="enter">Enter</string>
+    <!--Stings for third activity-->
+    <string name="team_one">Team One:</string>
+    <string name="team_two">Team Two:</string>
 
-    <!--Strings for text Popup Layout-->
-    <string name="textPopupTitle">Title</string>
-    <string name="enter_text_here">Enter Text Here</string>
+    <!--Stings for second activity-->
+    <string name="switch_team">Switch Team</string>
 
     <!--Strings for won Popup Layout-->
     <string name="wonPopupText">Won!</string>
@@ -58,11 +41,12 @@
     <string name="redcards">Red Cards</string>
     <string name="goalssaved">Goals Saved</string>
     <string name="fouls">Fouls</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter">Enter</string>
 
     <!--Strings for the player positions-->
     <string name="position_defense">Position: Defense</string>
     <string name="position_goalie">Position: Goalie</string>
     <string name="position_forward">Position: Forward</string>
     <string name="position_mid">Position: Mid-Field</string>
-
 </resources>

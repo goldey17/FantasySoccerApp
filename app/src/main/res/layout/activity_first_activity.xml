@@ -23,29 +23,57 @@ to second activity or third activity.-->
         android:layout_alignParentTop="true"
         android:id="@+id/optionButtons">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/add_team"
-            android:id="@+id/addTeamButton"
+            android:id="@+id/addTeamText"
             android:padding="@dimen/first_activity_button_padding"
-            android:textSize="@dimen/first_activity_large_text_size" />
+            android:textSize="@dimen/first_activity_large_text_size"
+            android:textIsSelectable="false" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/enterTeamName"
+            android:gravity="center_horizontal"
+            android:text="@string/enter_text_here"
+            android:textSize="@dimen/dropdown_popup_text_width" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/saveName"
+            android:id="@+id/saveTeam"
+            android:textSize="@dimen/first_activity_large_text_size"
+            android:padding="@dimen/first_activity_button_padding" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/add_player"
-            android:id="@+id/addPlayerButton"
+            android:id="@+id/addPlayerText"
             android:padding="@dimen/first_activity_button_padding"
-            android:textSize="@dimen/first_activity_large_text_size" />
+            android:textSize="@dimen/first_activity_large_text_size"
+            android:textIsSelectable="false" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/enterPlayerName"
+            android:gravity="center_horizontal"
+            android:text="@string/enter_text_here"
+            android:textSize="@dimen/dropdown_popup_text_width" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/remove_player"
-            android:id="@+id/removePlayerButton"
-            android:padding="@dimen/first_activity_button_padding"
-            android:textSize="@dimen/first_activity_large_text_size" />
+            android:layout_height="wrap_content"
+            android:text="@string/saveName"
+            android:id="@+id/savePlayer"
+            android:textSize="@dimen/first_activity_large_text_size"
+            android:padding="@dimen/first_activity_button_padding" />
 
         <Button
             android:layout_width="wrap_content"
@@ -206,6 +234,19 @@ to second activity or third activity.-->
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goToSecondActivity"
+        android:layout_gravity="center"
+        android:textSize="@dimen/first_activity_small_text_size"
+        android:text="@string/playerEdit"
+        android:layout_alignTop="@+id/goToThirdActivity"
+        android:layout_toRightOf="@+id/goToThirdActivity"
+        android:layout_toEndOf="@+id/goToThirdActivity"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp" />
 
     <ImageView
         android:layout_width="100dp"
