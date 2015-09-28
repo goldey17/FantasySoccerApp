@@ -121,10 +121,12 @@ public class SoccerDB {
 
     public static void addPlayer(String playerName, String teamName){
         SoccerPlayer newPlayer;
+        playerName = playerName.trim();
         if (playerName.indexOf(" ") == -1){
             newPlayer = new SoccerPlayer(playerName, "", teamName,"forward",R.drawable.error_page_logo);
+            playerName = playerName + " ";
         }else{
-            newPlayer = new SoccerPlayer(playerName.substring(0,playerName.indexOf(" ")), playerName.substring(playerName.indexOf(" ")), teamName,"forward",R.drawable.error_page_logo);
+            newPlayer = new SoccerPlayer(playerName.substring(0,playerName.indexOf(" ")), playerName.substring(playerName.indexOf(" ") + 1), teamName,"forward",R.drawable.error_page_logo);
         }
         playerDatabase.put(playerName, newPlayer);
         SoccerTeam team = teamDatabase.get(teamName);
@@ -148,5 +150,18 @@ public class SoccerDB {
             player.setTeamName(teamName);
             oldTeam.removePlayer(player);
         }
+    }
+
+    public static void updatePlayer(String name, SoccerPlayer player){
+        playerDatabase.put(name, player);
+        SoccerTeam team = teamDatabase.get(player.getTeamName());
+        team.addPlayer(player);
+        team.increaseRedCards(player.getRedCards());
+        team.increaseGoalsScored(player.getGoalsScored());
+        team.increaseGoalsSaved(player.getGoalsSaved());
+        team.increaseAssists(player.getAssists());
+        team.increaseFouls(player.getFouls());
+        team.increaseYellowCards(player.getYellowCards());
+        teamDatabase.put(player.getTeamName(), team);
     }
 }

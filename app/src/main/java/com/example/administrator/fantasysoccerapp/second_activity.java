@@ -1,6 +1,7 @@
 package com.example.administrator.fantasysoccerapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -74,6 +75,7 @@ public class second_activity extends AppCompatActivity implements View.OnClickLi
         team4.setOnClickListener(this);
         team5.setOnClickListener(this);
         save.setOnClickListener(this);
+        goToFirstActivity.setOnClickListener(this);
 
 
         populatePlayerDropdown();
@@ -174,19 +176,31 @@ public class second_activity extends AppCompatActivity implements View.OnClickLi
             SoccerDB.addPlayerToTeam(team1.getText().toString(), playerSelected);
             showPlayerData(playerSelected);
         }else if (view == team2){
-            SoccerDB.addPlayerToTeam(team1.getText().toString(), playerSelected);
+            SoccerDB.addPlayerToTeam(team2.getText().toString(), playerSelected);
             showPlayerData(playerSelected);
         }else if (view == team3){
-            SoccerDB.addPlayerToTeam(team1.getText().toString(), playerSelected);
+            SoccerDB.addPlayerToTeam(team3.getText().toString(), playerSelected);
             showPlayerData(playerSelected);
         }else if (view == team4){
-            SoccerDB.addPlayerToTeam(team1.getText().toString(), playerSelected);
+            SoccerDB.addPlayerToTeam(team4.getText().toString(), playerSelected);
             showPlayerData(playerSelected);
         }else if (view == team5){
-            SoccerDB.addPlayerToTeam(team1.getText().toString(), playerSelected);
+            SoccerDB.addPlayerToTeam(team5.getText().toString(), playerSelected);
             showPlayerData(playerSelected);
+        }else if (view == goToFirstActivity){
+            finish();
         }else if (view == save){
-            return;
+            SoccerPlayer player = SoccerDB.getPlayer(playerSelected);
+            SoccerTeam team = SoccerDB.getTeam(player.getTeamName());
+            team.removePlayer(player);
+            player.increaseGoalsScored(goals.getText().toString());
+            player.increaseGoalsSaved(goalsSaved.getText().toString());
+            player.increaseAssists(assists.getText().toString());
+            player.increaseFouls(fouls.getText().toString());
+            player.increaseYellowCards(yellowCards.getText().toString());
+            player.increaseRedCards(redCards.getText().toString());
+            player.setPosition(posistion.getText().toString());
+            SoccerDB.updatePlayer(playerSelected,player);
         }
     }//onClick
 }//second_activity

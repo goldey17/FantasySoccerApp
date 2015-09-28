@@ -1,18 +1,12 @@
 package com.example.administrator.fantasysoccerapp;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,8 +21,6 @@ import java.util.Hashtable;
 public class first_activity extends AppCompatActivity implements View.OnClickListener{
 
     //Initialize all Buttons
-    Button addPlayer;
-    Button removePlayer;
     Button teamStats;
     Button player1Stats;
     Button player2Stats;
@@ -64,8 +56,6 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     //Initialize edit text
     EditText editableTeamName;
     EditText editablePlayerName;
-
-
 
     @Override
     //Used for all button clicks associated with a popup
