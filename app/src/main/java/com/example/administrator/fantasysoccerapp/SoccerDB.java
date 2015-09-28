@@ -126,7 +126,7 @@ public class SoccerDB {
         }else{
             newPlayer = new SoccerPlayer(playerName.substring(0,playerName.indexOf(" ")), playerName.substring(playerName.indexOf(" ")), teamName,"forward",R.drawable.error_page_logo);
         }
-        playerDatabase.put(playerName,newPlayer);
+        playerDatabase.put(playerName, newPlayer);
         SoccerTeam team = teamDatabase.get(teamName);
         team.addPlayer(newPlayer);
     }
@@ -137,5 +137,16 @@ public class SoccerDB {
 
     public static boolean isPlayer(String playerName){
         return playerDatabase.containsKey(playerName);
+    }
+
+    public static void addPlayerToTeam(String teamName, String playerName){
+        SoccerTeam team = teamDatabase.get(teamName);
+        SoccerPlayer player = playerDatabase.get(playerName);
+        String oldTeamName = player.getTeamName();
+        SoccerTeam oldTeam = teamDatabase.get(oldTeamName);
+        if (team.addPlayer(player)){
+            player.setTeamName(teamName);
+            oldTeam.removePlayer(player);
+        }
     }
 }

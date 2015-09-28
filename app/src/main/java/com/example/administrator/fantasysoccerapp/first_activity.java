@@ -163,16 +163,19 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         }else if (SoccerDB.getNumberOfPlayers(tempTeamName) == 1){
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
             player1Name.setText(player1);
+            player1Name.setVisibility(View.VISIBLE);
             player2Name.setVisibility(View.GONE);
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
             int player1Im = (players.get(0).getPicture());
             player1Image.setBackgroundResource(player1Im);
+            player1Image.setVisibility(View.VISIBLE);
             player2Image.setVisibility(View.GONE);
             player3Image.setVisibility(View.GONE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+            player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.GONE);
             player3Stats.setVisibility(View.GONE);
             player4Stats.setVisibility(View.GONE);
@@ -182,6 +185,8 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             String player2 = (players.get(1).getFirstName() + " " + players.get(1).getLastName());
             player1Name.setText(player1);
             player2Name.setText(player2);
+            player1Name.setVisibility(View.VISIBLE);
+            player2Name.setVisibility(View.VISIBLE);
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
@@ -189,9 +194,13 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             int player2Im = (players.get(1).getPicture());
             player1Image.setBackgroundResource(player1Im);
             player2Image.setBackgroundResource(player2Im);
+            player1Image.setVisibility(View.VISIBLE);
+            player2Image.setVisibility(View.VISIBLE);
             player3Image.setVisibility(View.GONE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+            player1Stats.setVisibility(View.VISIBLE);
+            player2Stats.setVisibility(View.VISIBLE);
             player3Stats.setVisibility(View.GONE);
             player4Stats.setVisibility(View.GONE);
             player5Stats.setVisibility(View.GONE);
@@ -202,6 +211,9 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player1Name.setText(player1);
             player2Name.setText(player2);
             player3Name.setText(player3);
+            player1Name.setVisibility(View.VISIBLE);
+            player2Name.setVisibility(View.VISIBLE);
+            player3Name.setVisibility(View.VISIBLE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
             int player1Im = (players.get(0).getPicture());
@@ -210,8 +222,14 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player1Image.setBackgroundResource(player1Im);
             player2Image.setBackgroundResource(player2Im);
             player3Image.setBackgroundResource(player3Im);
+            player1Image.setVisibility(View.VISIBLE);
+            player2Image.setVisibility(View.VISIBLE);
+            player3Image.setVisibility(View.VISIBLE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+            player1Stats.setVisibility(View.VISIBLE);
+            player2Stats.setVisibility(View.VISIBLE);
+            player3Stats.setVisibility(View.VISIBLE);
             player4Stats.setVisibility(View.GONE);
             player5Stats.setVisibility(View.GONE);
         }else if(SoccerDB.getNumberOfPlayers(tempTeamName) == 4){
@@ -223,6 +241,10 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player2Name.setText(player2);
             player3Name.setText(player3);
             player4Name.setText(player4);
+            player1Name.setVisibility(View.VISIBLE);
+            player2Name.setVisibility(View.VISIBLE);
+            player3Name.setVisibility(View.VISIBLE);
+            player4Name.setVisibility(View.VISIBLE);
             player5Name.setVisibility(View.GONE);
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
@@ -232,7 +254,15 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player2Image.setBackgroundResource(player2Im);
             player3Image.setBackgroundResource(player3Im);
             player4Image.setBackgroundResource(player4Im);
+            player1Image.setVisibility(View.VISIBLE);
+            player2Image.setVisibility(View.VISIBLE);
+            player3Image.setVisibility(View.VISIBLE);
+            player4Image.setVisibility(View.VISIBLE);
             player5Image.setVisibility(View.GONE);
+            player1Stats.setVisibility(View.VISIBLE);
+            player2Stats.setVisibility(View.VISIBLE);
+            player3Stats.setVisibility(View.VISIBLE);
+            player4Stats.setVisibility(View.VISIBLE);
             player5Stats.setVisibility(View.GONE);
         }else{
             String player1 = (players.get(0).getFirstName() + " " + players.get(0).getLastName());
@@ -245,6 +275,11 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setText(player3);
             player4Name.setText(player4);
             player5Name.setText(player5);
+            player1Name.setVisibility(View.VISIBLE);
+            player2Name.setVisibility(View.VISIBLE);
+            player3Name.setVisibility(View.VISIBLE);
+            player4Name.setVisibility(View.VISIBLE);
+            player5Name.setVisibility(View.VISIBLE);
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
             int player3Im = (players.get(2).getPicture());
@@ -255,6 +290,16 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setBackgroundResource(player3Im);
             player4Image.setBackgroundResource(player4Im);
             player5Image.setBackgroundResource(player5Im);
+            player1Image.setVisibility(View.VISIBLE);
+            player2Image.setVisibility(View.VISIBLE);
+            player3Image.setVisibility(View.VISIBLE);
+            player4Image.setVisibility(View.VISIBLE);
+            player5Image.setVisibility(View.VISIBLE);
+            player1Stats.setVisibility(View.VISIBLE);
+            player2Stats.setVisibility(View.VISIBLE);
+            player3Stats.setVisibility(View.VISIBLE);
+            player4Stats.setVisibility(View.VISIBLE);
+            player5Stats.setVisibility(View.VISIBLE);
         }
     }
 
@@ -272,6 +317,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             team1Name.setText(teams.get(0));
             team2Name.setText(teams.get(1));
             team3Name.setText(teams.get(2));
+            team3Name.setVisibility(View.VISIBLE);
             team4Name.setVisibility(View.GONE);
             team5Name.setVisibility(View.GONE);
         }else if(SoccerDB.getNumberOfTeams() == 4){
@@ -279,6 +325,8 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             team2Name.setText(teams.get(1));
             team3Name.setText(teams.get(2));
             team4Name.setText(teams.get(3));
+            team3Name.setVisibility(View.VISIBLE);
+            team4Name.setVisibility(View.VISIBLE);
             team5Name.setVisibility(View.GONE);
         }else{
             team1Name.setText(teams.get(0));
@@ -286,6 +334,9 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             team3Name.setText(teams.get(2));
             team4Name.setText(teams.get(3));
             team5Name.setText(teams.get(4));
+            team3Name.setVisibility(View.VISIBLE);
+            team4Name.setVisibility(View.VISIBLE);
+            team5Name.setVisibility(View.VISIBLE);
         }
     }
 
@@ -312,8 +363,10 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             setPlayerInfo(str);
         }else if (view == savePlayer) {
             String str = editablePlayerName.getText().toString();
-            SoccerDB.addPlayer(str, teamName.getText().toString());
-            setPlayerInfo(teamName.getText().toString());
+            if (!SoccerDB.isPlayer(str)){
+                SoccerDB.addPlayer(str, teamName.getText().toString());
+                setPlayerInfo(teamName.getText().toString());
+            }
         }else {
             LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 

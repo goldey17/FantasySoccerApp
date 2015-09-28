@@ -29,6 +29,7 @@
 
     <!--Stings for second activity-->
     <string name="switch_team">Switch Team</string>
+    <string name="save">Save Changes</string>
 
     <!--Strings for won Popup Layout-->
     <string name="wonPopupText">Won!</string>
