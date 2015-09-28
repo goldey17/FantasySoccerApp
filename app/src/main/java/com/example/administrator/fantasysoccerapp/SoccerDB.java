@@ -5,6 +5,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.jar.Attributes;
 
+import javax.net.ssl.SSLEngineResult;
+
 /**
  * Created by Jordan Goldey
  * Last edited 9/25/2015
@@ -91,6 +93,10 @@ public class SoccerDB {
         SoccerTeam team = teamDatabase.get(teamName);
         ArrayList<SoccerPlayer> players = team.getPlayers();
         return players;
+    }
+
+    public static Hashtable<String, SoccerPlayer> getPlayers() {
+        return playerDatabase;
     }
 
     public static SoccerPlayer getPlayer(String playerName) {
