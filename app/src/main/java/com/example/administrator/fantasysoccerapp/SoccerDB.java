@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * Created by Jordan Goldey
- * Last edited 9/28/2015
+ * Last edited 9/29/2015
  * SoccerDB is the database for the app. It has a default database and all the methods required to
  * handle the database.
  */
@@ -174,39 +174,39 @@ public class SoccerDB {
         team.addPlayer(player);
 
         //Change goals scored
-        int oldGoals = Integer.parseInt(team.getGoalsScored());
-        int newGoals = Integer.parseInt(player.getGoalsScored());
-        String goals = "" + (oldGoals + newGoals);
+        int oldGoals = team.getGoalsScored();
+        int newGoals = player.getGoalsScored();
+        int goals = (oldGoals + newGoals);
         team.increaseGoalsScored(goals);
 
         //Change goals saved
-        int oldGoalsSaved = Integer.parseInt(team.getGoalsSaved());
-        int newGoalsSaved = Integer.parseInt(player.getGoalsSaved());
-        String goalsSaved = "" + (oldGoalsSaved + newGoalsSaved);
+        int oldGoalsSaved = team.getGoalsSaved();
+        int newGoalsSaved = player.getGoalsSaved();
+        int goalsSaved = (oldGoalsSaved + newGoalsSaved);
         team.increaseGoalsSaved(goalsSaved);
 
         //Change assists
-        int oldAssists = Integer.parseInt(team.getAssists());
-        int newAssists = Integer.parseInt(player.getAssists());
-        String Assists = "" + (oldAssists + newAssists);
+        int oldAssists = team.getAssists();
+        int newAssists = player.getAssists();
+        int Assists = (oldAssists + newAssists);
         team.increaseAssists(Assists);
 
         //Change fouls
-        int oldFouls = Integer.parseInt(team.getFouls());
-        int newFouls = Integer.parseInt(player.getFouls());
-        String fouls = "" + (oldFouls + newFouls);
+        int oldFouls = team.getFouls();
+        int newFouls = player.getFouls();
+        int fouls = (oldFouls + newFouls);
         team.increaseFouls(fouls);
 
         //Change yellow cards
-        int oldYellow = Integer.parseInt(team.getYellowCards());
-        int newYellow = Integer.parseInt(player.getYellowCards());
-        String yellow = "" + (oldYellow + newYellow);
+        int oldYellow = team.getYellowCards();
+        int newYellow = player.getYellowCards();
+        int yellow = (oldYellow + newYellow);
         team.increaseYellowCards(yellow);
 
         //Change red cards
-        int oldRed = Integer.parseInt(team.getRedCards());
-        int newRed = Integer.parseInt(player.getRedCards());
-        String red = "" + (oldRed + newRed);
+        int oldRed = team.getRedCards();
+        int newRed = player.getRedCards();
+        int red = (oldRed + newRed);
         team.increaseRedCards(red);
 
         teamDatabase.put(player.getTeamName(), team);
@@ -254,10 +254,20 @@ public class SoccerDB {
         //Give the goalies of each team a random amount of saves
         int randomGoalsSaved = randomGenerator.nextInt(10);
         int randomGoalsSaved2 = randomGenerator.nextInt(10);
-        goalie.increaseGoalsSaved("" + (randomGoalsSaved + Integer.parseInt(goalie.getGoalsSaved())));
-        updatePlayer((goalie.getFirstName() + " " + goalie.getLastName()), goalie);
-        goalie2.increaseGoalsSaved("" + (randomGoalsSaved2 + Integer.parseInt(goalie2.getGoalsSaved())));
-        updatePlayer((goalie2.getFirstName() + " "  + goalie2.getLastName()), goalie2);
+        winningTeam.removePlayer(goalie);
+        goalie.increaseGoalsSaved(randomGoalsSaved + goalie.getGoalsSaved());
+        playerDatabase.put(goalie.getFirstName() + " " + goalie.getLastName(), goalie);
+        winningTeam.addPlayer(goalie);
+        winningTeam.increaseGoalsSaved(randomGoalsSaved + winningTeam.getGoalsSaved());
+        teamDatabase.put(winningTeam.getTeamName(), winningTeam);
+
+        losingTeam.removePlayer(goalie2);
+        goalie2.increaseGoalsSaved(randomGoalsSaved2 + goalie2.getGoalsSaved());
+        playerDatabase.put(goalie2.getFirstName() + " " + goalie2.getLastName(), goalie2);
+        losingTeam.addPlayer(goalie2);
+        losingTeam.increaseGoalsSaved(randomGoalsSaved2 + losingTeam.getGoalsSaved());
+        teamDatabase.put(losingTeam.getTeamName(), losingTeam);
+
 
         //Randomly add goals to players stats and team stats of the winning team, the goalie is not
         //allowed to score goals
@@ -268,8 +278,12 @@ public class SoccerDB {
                 goalsScored ++;
                 SoccerPlayer tempPlayer = winningTeamPlayers.get(i);
                 if (!tempPlayer.equals(goalie)){
-                    tempPlayer.increaseGoalsScored("" + (1 + Integer.parseInt(tempPlayer.getGoalsScored())));
-                    updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+                    winningTeam.removePlayer(tempPlayer);
+                    tempPlayer.increaseGoalsScored(1 + tempPlayer.getGoalsScored());
+                    playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+                    winningTeam.addPlayer(tempPlayer);
+                    winningTeam.increaseGoalsScored(1 + winningTeam.getGoalsScored());
+                    teamDatabase.put(winningTeam.getTeamName(), winningTeam);
                 }
             }
         }
@@ -281,8 +295,12 @@ public class SoccerDB {
             randomPlayer = randomGenerator.nextInt(4);
             player = winningTeamPlayers.get(randomPlayer);
         }
-        player.increaseGoalsScored("" + (1 + Integer.parseInt(player.getGoalsScored())));
-        updatePlayer((player.getFirstName() + " " + player.getLastName()), player);
+        winningTeam.removePlayer(player);
+        player.increaseGoalsScored(1 + player.getGoalsScored());
+        playerDatabase.put(player.getFirstName() + " " + player.getLastName(), player);
+        winningTeam.addPlayer(player);
+        winningTeam.increaseGoalsScored(1 + winningTeam.getGoalsScored());
+        teamDatabase.put(winningTeam.getTeamName(), winningTeam);
 
         //If the winning team scored more than two goals have the losing team have two less goals
         // than the winning team, again the goalie cannot score
@@ -294,8 +312,12 @@ public class SoccerDB {
                     rand = randomGenerator.nextInt(4);
                     tempPlayer = losingTeamPlayers.get(rand);
                 }
-                tempPlayer.increaseGoalsScored("" + (1 + Integer.parseInt(tempPlayer.getGoalsScored())));
-                updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+                losingTeam.removePlayer(tempPlayer);
+                tempPlayer.increaseGoalsScored(1 + tempPlayer.getGoalsScored());
+                playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+                winningTeam.addPlayer(tempPlayer);
+                losingTeam.increaseGoalsScored(1 + losingTeam.getGoalsScored());
+                teamDatabase.put(losingTeam.getTeamName(), winningTeam);
             }
         }
 
@@ -303,15 +325,23 @@ public class SoccerDB {
         for (int i = 0; i == (goalsScored/2); i++){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
-            tempPlayer.increaseAssists("" + (1 + Integer.parseInt(tempPlayer.getAssists())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            winningTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseAssists(1 + tempPlayer.getAssists());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            winningTeam.addPlayer(tempPlayer);
+            winningTeam.increaseAssists(1 + winningTeam.getAssists());
+            teamDatabase.put(winningTeam.getTeamName(), winningTeam);
         }
         if (goalsScored > 2){
             for (int i = 0; i == ((goalsScored - 2)/2); i++){
                 int rand = randomGenerator.nextInt(4);
                 SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
-                tempPlayer.increaseAssists("" + (1 + Integer.parseInt(tempPlayer.getAssists())));
-                updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+                losingTeam.removePlayer(tempPlayer);
+                tempPlayer.increaseAssists(1 + tempPlayer.getAssists());
+                playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+                losingTeam.addPlayer(tempPlayer);
+                losingTeam.increaseAssists(1 + losingTeam.getAssists());
+                teamDatabase.put(losingTeam.getTeamName(), losingTeam);
             }
         }
 
@@ -320,15 +350,23 @@ public class SoccerDB {
         for (int i = 0; i == randomFouls; i++){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
-            tempPlayer.increaseFouls("" + (1 + Integer.parseInt(tempPlayer.getFouls())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            winningTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseFouls(1 + tempPlayer.getFouls());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            winningTeam.addPlayer(tempPlayer);
+            winningTeam.increaseFouls(1 + winningTeam.getFouls());
+            teamDatabase.put(winningTeam.getTeamName(), winningTeam);
         }
         randomFouls = randomGenerator.nextInt(3);
         for (int i = 0; i == randomFouls; i++){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
-            tempPlayer.increaseFouls("" + (1 + Integer.parseInt(tempPlayer.getFouls())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            losingTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseFouls(1 + tempPlayer.getFouls());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            losingTeam.addPlayer(tempPlayer);
+            losingTeam.increaseFouls(1 + losingTeam.getFouls());
+            teamDatabase.put(losingTeam.getTeamName(), losingTeam);
         }
 
         //Assign red cards to a random player on each team
@@ -336,30 +374,46 @@ public class SoccerDB {
         if (chanceToGetRedCard > 0.8){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
-            tempPlayer.increaseRedCards("" + (1 + Integer.parseInt(tempPlayer.getRedCards())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            winningTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseRedCards(1 + tempPlayer.getRedCards());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            winningTeam.addPlayer(tempPlayer);
+            winningTeam.increaseRedCards(1 + winningTeam.getRedCards());
+            teamDatabase.put(winningTeam.getTeamName(), winningTeam);
         }
         chanceToGetRedCard = Math.random();
         if (chanceToGetRedCard > 0.8){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
-            tempPlayer.increaseRedCards("" + (1 + Integer.parseInt(tempPlayer.getRedCards())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            losingTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseRedCards(1 + tempPlayer.getRedCards());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            losingTeam.addPlayer(tempPlayer);
+            losingTeam.increaseRedCards(1 + losingTeam.getRedCards());
+            teamDatabase.put(losingTeam.getTeamName(), losingTeam);
         }
         //Assign yellow cards to a random player on each team
         double chanceToGetYellowCard = Math.random();
         if (chanceToGetYellowCard > 0.6){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
-            tempPlayer.increaseYellowCards("" + (1 + Integer.parseInt(tempPlayer.getYellowCards())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            winningTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseYellowCards(1 + tempPlayer.getYellowCards());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            winningTeam.addPlayer(tempPlayer);
+            winningTeam.increaseYellowCards(1 + winningTeam.getYellowCards());
+            teamDatabase.put(winningTeam.getTeamName(), winningTeam);
         }
         chanceToGetYellowCard = Math.random();
         if (chanceToGetYellowCard > 0.6){
             int rand = randomGenerator.nextInt(4);
             SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
-            tempPlayer.increaseYellowCards("" + (1 + Integer.parseInt(tempPlayer.getYellowCards())));
-            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            losingTeam.removePlayer(tempPlayer);
+            tempPlayer.increaseYellowCards(1 + tempPlayer.getYellowCards());
+            playerDatabase.put(tempPlayer.getFirstName() + " " + tempPlayer.getLastName(), tempPlayer);
+            losingTeam.addPlayer(tempPlayer);
+            losingTeam.increaseYellowCards(1 + losingTeam.getYellowCards());
+            teamDatabase.put(losingTeam.getTeamName(), losingTeam);
         }
 
         //Return the winning team

@@ -1,12 +1,9 @@
 package com.example.administrator.fantasysoccerapp;
 
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,15 +14,23 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
 
+/**
+ * Created by Jordan Goldey
+ * Last edited 9/29/2015
+ * The third activity is a where the game is played. Each side gets assigned to a team via dropdown.
+ * Once teams are picked the players can be placed on the board by clicking the image buttons. A
+ * game wont start until both teams are different and all the players on the board are different.
+ * Once a game is started a winner is determined.
+ */
 public class third_activity extends AppCompatActivity implements View.OnClickListener{
+
+    //Declare all spinners
     Spinner teamOne;
     Spinner teamTwo;
 
+    //Declare all image buttons
     ImageButton team1Forward1;
     ImageButton team1Forward2;
     ImageButton team1Defense1;
@@ -37,9 +42,11 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
     ImageButton team2Defense2;
     ImageButton team2Goalie;
 
+    //Declare all buttons
     Button goBack;
     Button playGame;
 
+    //Declare and initalize the click count variables
     int team1GoalieClickCount = 0;
     int team1Forward1ClickCount = 0;
     int team1Forward2ClickCount = 0;
@@ -51,20 +58,26 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
     int team2Defense1ClickCount = 0;
     int team2Defense2ClickCount = 0;
 
+    //Declare an Arraylist of the team names
     ArrayList <String> teams;
 
+    //Delclare and initialize variables for keeping track of what information is set on the activity
     String teamOneSelected = "";
     String teamTwoSelected = "";
     String[] team1Positions = new String[5];
     String[] team2Positions = new String[5];
+
     @Override
+    //Function that is used when the activity is drawn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_activity);
 
+        //Initialize the spinners
         teamOne = (Spinner) findViewById(R.id.teamOneDropdown);
         teamTwo = (Spinner) findViewById(R.id.teamTwoDropdown);
 
+        //Initialize all Image Buttons
         team1Forward1 = (ImageButton) findViewById(R.id.team1Forward1);
         team1Forward2 = (ImageButton) findViewById(R.id.team1Forward2);
         team1Defense1 = (ImageButton) findViewById(R.id.team1Defense1);
@@ -76,9 +89,11 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
         team2Defense2 = (ImageButton) findViewById(R.id.team2Defense2);
         team2Goalie = (ImageButton) findViewById(R.id.team2Goalie);
 
+        //Initialize the Buttons
         goBack = (Button) findViewById(R.id.leaveThirdActivity);
         playGame = (Button) findViewById(R.id.playGame);
 
+        //Set on click listeners for all Buttons and Image Buttons
         team1Forward1.setOnClickListener(this);
         team1Forward2.setOnClickListener(this);
         team1Defense1.setOnClickListener(this);
@@ -89,18 +104,19 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
         team2Defense1.setOnClickListener(this);
         team2Defense2.setOnClickListener(this);
         team2Goalie.setOnClickListener(this);
-
         goBack.setOnClickListener(this);
         playGame.setOnClickListener(this);
 
+        //Set all team positions to "" to show they haven't been set yet
         for (int i = 0; i < 5; i ++){
             team1Positions[i] = "";
             team2Positions[i] = "";
         }
 
+        //Call methods to populate dropdowns
         populateTeamOneDropdown();
         populateTeamTwoDropdown();
-    }
+    }//onCreate
 
     //Populates the team one dropdown with a list of all the teams
     private void populateTeamOneDropdown() {
@@ -112,8 +128,7 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                 (this,android.R.layout.simple_dropdown_item_1line, teams);
         teamOne.setAdapter(adp);
 
-        //When an item is selected in the dropdown the team selected variable changes and the
-        //player images changes to match selection
+        //When an item is selected in the dropdown the team selected variable changes
         teamOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
@@ -137,8 +152,7 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                 (this,android.R.layout.simple_dropdown_item_1line, teams);
         teamTwo.setAdapter(adp);
 
-        //When an item is selected in the dropdown the team selected variable changes and the
-        //player images changes to match selection
+        //When an item is selected in the dropdown the team selected variable changes
         teamTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
@@ -153,9 +167,14 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
     }//populateTeamTwoDropdown
 
     @Override
+    //Method to handle any button clicks
     public void onClick(View view) {
         if(view == team1Defense1 || view == team1Defense2 || view == team1Forward1 ||
                 view == team1Forward2 || view == team1Goalie){
+            //If any of the team one image buttons are clicked, increase the count according to what
+            //position was clicked, and load an image of one of the players. So each time the button
+            //is clicked a new player image appears. When the counter reaches the size of the team
+            //it rolls back to zero. This happens for all the positions on team one.
             if (!teamOneSelected.equals("")){
                 SoccerTeam team = SoccerDB.getTeam(teamOneSelected);
                 ArrayList<SoccerPlayer> players = team.getPlayers();
@@ -204,6 +223,10 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
             }
         }else if(view == team2Defense1 || view == team2Defense2 || view == team2Forward1 ||
                 view == team2Forward2 || view == team2Goalie){
+            //If any of the team two image buttons are clicked, increase the count according to what
+            //position was clicked, and load an image of one of the players. So each time the button
+            //is clicked a new player image appears. When the counter reaches the size of the team
+            //it rolls back to zero. This happens for all the positions on team team.
             if (!teamTwoSelected.equals("")){
                 SoccerTeam team = SoccerDB.getTeam(teamTwoSelected);
                 ArrayList<SoccerPlayer> players = team.getPlayers();
@@ -248,12 +271,15 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                         team2Forward2ClickCount = 0;
                     }
                 }
-
-
             }
         }else if (view == goBack){
+            //finish the activity if the goBack button is clicked
             finish();
         }else if (view == playGame){
+            //If the play game button is pushed make sure that team one and team two are not the
+            //same. Next check if all the positions on both teams are filled. Next check if all the
+            //positions on both teams have unique players and that one player isn't playing two
+            //positions. If any of these checks fail nothing happens.
             if (!teamOneSelected.equals(teamTwoSelected)) {
                 boolean playersNotSet = false;
                 for (int i = 0; i < 5; i++){
@@ -283,6 +309,7 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                     if (playersDifferent){
+                        //If all checks passed a game is started and popup appears saying who won.
                         LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
                         //Opens up the type of popup corresponding to the button clicked
@@ -292,6 +319,7 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                         final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
+                        //Fills in the title with who won 
                         TextView title = (TextView) popupView.findViewById(R.id.wonPopupText);
                         String winner = SoccerDB.chooseWinner(teamOneSelected,teamTwoSelected);
                         title.setText(winner + " Won!!!!!");

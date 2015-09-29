@@ -447,22 +447,22 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                 if (tempTeamName.equals("")){
                     SoccerPlayer player = SoccerDB.getPlayer(playerName);
                     title.setText(playerName);
-                    goals.setText(player.getGoalsScored());
-                    goalssaved.setText(player.getGoalsSaved());
-                    assists.setText(player.getAssists());
-                    fouls.setText(player.getFouls());
-                    yellowcards.setText(player.getYellowCards());
-                    redcards.setText(player.getRedCards());
+                    goals.setText(Integer.toString(player.getGoalsScored()));
+                    goalssaved.setText(Integer.toString(player.getGoalsSaved()));
+                    assists.setText(Integer.toString(player.getAssists()));
+                    fouls.setText(Integer.toString(player.getFouls()));
+                    yellowcards.setText(Integer.toString(player.getYellowCards()));
+                    redcards.setText(Integer.toString(player.getRedCards()));
                     position.setText(player.getPosition());
                 }else{
                     SoccerTeam team = SoccerDB.getTeam(tempTeamName);
                     title.setText(tempTeamName);
-                    goals.setText(team.getGoalsScored());
-                    goalssaved.setText(team.getGoalsSaved());
-                    assists.setText(team.getAssists());
-                    fouls.setText(team.getFouls());
-                    yellowcards.setText(team.getYellowCards());
-                    redcards.setText(team.getRedCards());
+                    goals.setText(Integer.toString(team.getGoalsScored()));
+                    goalssaved.setText(Integer.toString(team.getGoalsSaved()));
+                    assists.setText(Integer.toString(team.getAssists()));
+                    fouls.setText(Integer.toString(team.getFouls()));
+                    yellowcards.setText(Integer.toString(team.getYellowCards()));
+                    redcards.setText(Integer.toString(team.getRedCards()));
                     position.setVisibility(view.GONE);
                     TextView posistionLabel = (TextView)popupView.findViewById(R.id.posistionText);
                     posistionLabel.setVisibility(view.GONE);

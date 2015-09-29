@@ -15,12 +15,12 @@ public class SoccerPlayer {
     private String teamName;
     private String position;
     private int picture;
-    private String goalsScored;
-    private String goalsSaved;
-    private String yellowCards;
-    private String redCards;
-    private String fouls;
-    private String assists;
+    private int goalsScored;
+    private int goalsSaved;
+    private int yellowCards;
+    private int redCards;
+    private int fouls;
+    private int assists;
 
     //Constructor to create a Soccer Player
     public SoccerPlayer (String newFirstName, String newLastName, String newTeamName,
@@ -30,12 +30,12 @@ public class SoccerPlayer {
         teamName = newTeamName;
         position = newPosition;
         picture = newPicture;
-        goalsScored = "0";
-        goalsSaved = "0";
-        yellowCards = "0";
-        redCards = "0";
-        fouls = "0";
-        assists = "0";
+        goalsScored = 0;
+        goalsSaved = 0;
+        yellowCards = 0;
+        redCards = 0;
+        fouls = 0;
+        assists = 0;
     }
 
     //Get methods to access the instance variables
@@ -57,27 +57,27 @@ public class SoccerPlayer {
 
     public int getPicture(){return picture;}
 
-    public String getGoalsScored(){
+    public int getGoalsScored(){
         return goalsScored;
     }
 
-    public String getGoalsSaved(){
+    public int getGoalsSaved(){
         return goalsSaved;
     }
 
-    public String getYellowCards(){
+    public int getYellowCards(){
         return yellowCards;
     }
 
-    public String getRedCards(){
+    public int getRedCards(){
         return redCards;
     }
 
-    public String getFouls(){
+    public int getFouls(){
         return fouls;
     }
 
-    public String getAssists(){
+    public int getAssists(){
         return assists;
     }
 
@@ -99,27 +99,27 @@ public class SoccerPlayer {
     }
 
     //Increase methods to increase the int variables
-    public void increaseGoalsScored(String newValue){
+    public void increaseGoalsScored(int newValue){
         goalsScored = newValue;
     }
 
-    public void increaseGoalsSaved(String newValue){
+    public void increaseGoalsSaved(int newValue){
         goalsSaved = newValue;
     }
 
-    public void increaseYellowCards(String newValue){
+    public void increaseYellowCards(int newValue){
         yellowCards = newValue;
     }
 
-    public void increaseRedCards(String newValue){
+    public void increaseRedCards(int newValue){
         redCards = newValue;
     }
 
-    public void increaseFouls(String newValue){
+    public void increaseFouls(int newValue){
         fouls = newValue;
     }
 
-    public void increaseAssists(String newValue){
+    public void increaseAssists(int newValue){
         assists = newValue;
     }
 

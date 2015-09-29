@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Created by Jordan Goldey
- * Last edited 9/28/2015
+ * Last edited 9/29/2015
  * This activity shows the stats of one player at a time. The stats can be edited and saved. The
  * player that is being viewed can be moved to a new team. This activity returns to the first
  * activity.
@@ -93,12 +93,12 @@ public class second_activity extends AppCompatActivity implements View.OnClickLi
     private void showPlayerData(String fullName) {
         SoccerPlayer player = SoccerDB.getPlayer(fullName);
         //Set all stats with the corresponding player data
-        goals.setText(player.getGoalsScored());
-        goalsSaved.setText(player.getGoalsSaved());
-        assists.setText(player.getAssists());
-        fouls.setText(player.getFouls());
-        yellowCards.setText(player.getYellowCards());
-        redCards.setText(player.getRedCards());
+        goals.setText(Integer.toString(player.getGoalsScored()));
+        goalsSaved.setText(Integer.toString(player.getGoalsSaved()));
+        assists.setText(Integer.toString(player.getAssists()));
+        fouls.setText(Integer.toString(player.getFouls()));
+        yellowCards.setText(Integer.toString(player.getYellowCards()));
+        redCards.setText(Integer.toString(player.getRedCards()));
         posistion.setText(player.getPosition());
 
         //Sets the player image and team name
@@ -219,12 +219,12 @@ public class second_activity extends AppCompatActivity implements View.OnClickLi
             SoccerPlayer player = SoccerDB.getPlayer(playerSelected);
             SoccerTeam team = SoccerDB.getTeam(player.getTeamName());
             team.removePlayer(player);
-            player.increaseGoalsScored(goals.getText().toString());
-            player.increaseGoalsSaved(goalsSaved.getText().toString());
-            player.increaseAssists(assists.getText().toString());
-            player.increaseFouls(fouls.getText().toString());
-            player.increaseYellowCards(yellowCards.getText().toString());
-            player.increaseRedCards(redCards.getText().toString());
+            player.increaseGoalsScored(Integer.parseInt(goals.getText().toString()));
+            player.increaseGoalsSaved(Integer.parseInt(goalsSaved.getText().toString()));
+            player.increaseAssists(Integer.parseInt(assists.getText().toString()));
+            player.increaseFouls(Integer.parseInt(fouls.getText().toString()));
+            player.increaseYellowCards(Integer.parseInt(yellowCards.getText().toString()));
+            player.increaseRedCards(Integer.parseInt(redCards.getText().toString()));
             player.setPosition(posistion.getText().toString());
             SoccerDB.updatePlayer(playerSelected,player);
         }
