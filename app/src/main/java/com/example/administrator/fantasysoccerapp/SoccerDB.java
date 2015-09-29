@@ -3,6 +3,7 @@ package com.example.administrator.fantasysoccerapp;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 /**
  * Created by Jordan Goldey
@@ -209,5 +210,159 @@ public class SoccerDB {
         team.increaseRedCards(red);
 
         teamDatabase.put(player.getTeamName(), team);
+    }
+
+    //Function to decide the winner of a game when played and update stats for the team and players
+    public static String chooseWinner(String teamOne, String teamTwo) {
+
+        //Declare the teams of the winning team and losing team
+        SoccerTeam winningTeam;
+        SoccerTeam losingTeam;
+
+        //Decide a winner randomly and set the teams according to who won and lost
+        double randomNumber = Math.random();
+        if (randomNumber < 0.5) {
+            winningTeam = getTeam(teamOne);
+            losingTeam = getTeam(teamTwo);
+        } else {
+            winningTeam = getTeam(teamTwo);
+            losingTeam = getTeam(teamOne);
+        }
+
+        //Get list of both teams players
+        ArrayList<SoccerPlayer> winningTeamPlayers = winningTeam.getPlayers();
+        ArrayList<SoccerPlayer> losingTeamPlayers = losingTeam.getPlayers();
+
+        //Create a random number generator
+        Random randomGenerator = new Random();
+
+        //Find the goalie of each of the teams if no goalie just use random player
+        int randomPlayer = randomGenerator.nextInt(4);
+        SoccerPlayer goalie = winningTeamPlayers.get(randomPlayer);
+        SoccerPlayer goalie2 = losingTeamPlayers.get(randomPlayer);
+        for (int i = 0; i < 5; i++){
+            SoccerPlayer tempPlayer = winningTeamPlayers.get(i);
+            SoccerPlayer tempPlayer2 = losingTeamPlayers.get(i);
+            if (tempPlayer.getPosition().equals("goalie")){
+                goalie = tempPlayer;
+            }
+            if (tempPlayer2.getPosition().equals("goalie")){
+                goalie2 = tempPlayer2;
+            }
+        }
+
+        //Give the goalies of each team a random amount of saves
+        int randomGoalsSaved = randomGenerator.nextInt(10);
+        int randomGoalsSaved2 = randomGenerator.nextInt(10);
+        goalie.increaseGoalsSaved("" + (randomGoalsSaved + Integer.parseInt(goalie.getGoalsSaved())));
+        updatePlayer((goalie.getFirstName() + " " + goalie.getLastName()), goalie);
+        goalie2.increaseGoalsSaved("" + (randomGoalsSaved2 + Integer.parseInt(goalie2.getGoalsSaved())));
+        updatePlayer((goalie2.getFirstName() + " "  + goalie2.getLastName()), goalie2);
+
+        //Randomly add goals to players stats and team stats of the winning team, the goalie is not
+        //allowed to score goals
+        int goalsScored = 1;
+        for (int i = 0; i < 5; i++){
+            int randomGoalsScored = randomGenerator.nextInt(1);
+            if (randomGoalsScored == 1){
+                goalsScored ++;
+                SoccerPlayer tempPlayer = winningTeamPlayers.get(i);
+                if (!tempPlayer.equals(goalie)){
+                    tempPlayer.increaseGoalsScored("" + (1 + Integer.parseInt(tempPlayer.getGoalsScored())));
+                    updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+                }
+            }
+        }
+
+        //In case no goals were added add one for sure again making sure the player isnt the goalie
+        randomPlayer = randomGenerator.nextInt(4);
+        SoccerPlayer player = winningTeamPlayers.get(randomPlayer);
+        while (player.equals(goalie)){
+            randomPlayer = randomGenerator.nextInt(4);
+            player = winningTeamPlayers.get(randomPlayer);
+        }
+        player.increaseGoalsScored("" + (1 + Integer.parseInt(player.getGoalsScored())));
+        updatePlayer((player.getFirstName() + " " + player.getLastName()), player);
+
+        //If the winning team scored more than two goals have the losing team have two less goals
+        // than the winning team, again the goalie cannot score
+        if (goalsScored > 2){
+            for (int i = 0; i == (goalsScored - 2); i++){
+                int rand = randomGenerator.nextInt(4);
+                SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
+                while(player.equals(goalie2)){
+                    rand = randomGenerator.nextInt(4);
+                    tempPlayer = losingTeamPlayers.get(rand);
+                }
+                tempPlayer.increaseGoalsScored("" + (1 + Integer.parseInt(tempPlayer.getGoalsScored())));
+                updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            }
+        }
+
+        //Assign assists to a random player of each team, the number of assists is half of the goals
+        for (int i = 0; i == (goalsScored/2); i++){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
+            tempPlayer.increaseAssists("" + (1 + Integer.parseInt(tempPlayer.getAssists())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+        if (goalsScored > 2){
+            for (int i = 0; i == ((goalsScored - 2)/2); i++){
+                int rand = randomGenerator.nextInt(4);
+                SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
+                tempPlayer.increaseAssists("" + (1 + Integer.parseInt(tempPlayer.getAssists())));
+                updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+            }
+        }
+
+        //Assign fouls to a random player each team gets a random number of fouls
+        int randomFouls = randomGenerator.nextInt(3);
+        for (int i = 0; i == randomFouls; i++){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
+            tempPlayer.increaseFouls("" + (1 + Integer.parseInt(tempPlayer.getFouls())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+        randomFouls = randomGenerator.nextInt(3);
+        for (int i = 0; i == randomFouls; i++){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
+            tempPlayer.increaseFouls("" + (1 + Integer.parseInt(tempPlayer.getFouls())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+
+        //Assign red cards to a random player on each team
+        double chanceToGetRedCard = Math.random();
+        if (chanceToGetRedCard > 0.8){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
+            tempPlayer.increaseRedCards("" + (1 + Integer.parseInt(tempPlayer.getRedCards())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+        chanceToGetRedCard = Math.random();
+        if (chanceToGetRedCard > 0.8){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
+            tempPlayer.increaseRedCards("" + (1 + Integer.parseInt(tempPlayer.getRedCards())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+        //Assign yellow cards to a random player on each team
+        double chanceToGetYellowCard = Math.random();
+        if (chanceToGetYellowCard > 0.6){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = winningTeamPlayers.get(rand);
+            tempPlayer.increaseYellowCards("" + (1 + Integer.parseInt(tempPlayer.getYellowCards())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+        chanceToGetYellowCard = Math.random();
+        if (chanceToGetYellowCard > 0.6){
+            int rand = randomGenerator.nextInt(4);
+            SoccerPlayer tempPlayer = losingTeamPlayers.get(rand);
+            tempPlayer.increaseYellowCards("" + (1 + Integer.parseInt(tempPlayer.getYellowCards())));
+            updatePlayer((tempPlayer.getFirstName() + " " + tempPlayer.getLastName()), tempPlayer);
+        }
+
+        //Return the winning team
+        return winningTeam.getTeamName();
     }
 }
