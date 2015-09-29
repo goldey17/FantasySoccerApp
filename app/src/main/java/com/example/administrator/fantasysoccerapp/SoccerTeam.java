@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * Last edited 9/25/2015
  * SoccerTeam is a class that creates an object for a soccer team. It contains
  * instance variables relating to the information relating to a soccer teams stats during a game.
- * The class also contains get, increase, add, and set methods for all the instance variables.
+ * The class also contains get, increase, add, remove, and set methods for all the instance
+ * variables.
  */
 public class SoccerTeam {
     //Instance variable that describe the team
@@ -76,7 +77,7 @@ public class SoccerTeam {
         teamName = newTeamName;
     }
 
-    //Add method so add players to the players array if there is less than 6 players on the team
+    //Add method so add players to the players array if 5 players are not already on the team
     public boolean addPlayer(SoccerPlayer newPlayer){
         if (players.size() < 5){
             players.add(newPlayer);
@@ -86,7 +87,7 @@ public class SoccerTeam {
         }
     }
 
-    //Increase methods to increase the int variables
+    //Increase methods to increase the stat variables
     public void increaseGoalsScored(String newValue){
         goalsScored = newValue;
     }

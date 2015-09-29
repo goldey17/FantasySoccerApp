@@ -94,7 +94,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/goalsValueSecond" />
+                android:id="@+id/goalsValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +114,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/goalsSavedValueSecond" />
+                android:id="@+id/goalsSavedValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,7 +134,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/assistsValueSecond" />
+                android:id="@+id/assistsValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -151,7 +154,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/foulsValueSecond" />
+                android:id="@+id/foulsValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -170,7 +174,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/yellowValueSecond" />
+                android:id="@+id/yellowValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -189,7 +194,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/redValueSecond" />
+                android:id="@+id/redValueSecond"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout

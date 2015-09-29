@@ -11,16 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
-
+/**
+ * Created by Jordan Goldey
+ * Last edited 9/28/2015
+ * The first activity contains all the team information. There are up to five team buttons. When a
+ * team button is clicked the players are loaded on the screen showing there picture, name, and a
+ * stats button. When clicked the stats button loads a popup containing the players stats. Likewise
+ * when clicked the team stats button loads a popup with the team stats. A team or player can be
+ * added by typing a name and pushing the corresponding save button. Only five teams can be created
+ * and only 5 players can be on a team. Lastly, the page has buttons to go to the second and third
+ * activities.
+ */
 public class first_activity extends AppCompatActivity implements View.OnClickListener{
 
-    //Initialize all Buttons
+    //Declare all Buttons
     Button teamStats;
     Button player1Stats;
     Button player2Stats;
@@ -37,7 +44,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     Button saveTeam;
     Button savePlayer;
 
-    //Initialize all textviews
+    //Declare all Text Views
     TextView teamName;
     TextView player1Name;
     TextView player2Name;
@@ -45,7 +52,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     TextView player4Name;
     TextView player5Name;
 
-    //Initialize all pictures
+    //Declare all Images
     ImageView player1Image;
     ImageView player2Image;
     ImageView player3Image;
@@ -53,17 +60,17 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
     ImageView player5Image;
     ImageView teamLogo;
 
-    //Initialize edit text
+    //Declare all Edit Text
     EditText editableTeamName;
     EditText editablePlayerName;
 
     @Override
-    //Used for all button clicks associated with a popup
+    //Used to create the layout when it is called
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_activity);
 
-        //Initialize buttons
+        //Initialize all Buttons
         teamStats =(Button)findViewById(R.id.teamStatsButton);
         player1Stats = (Button)findViewById(R.id.player1StatsButton);
         player2Stats = (Button)findViewById(R.id.player2StatsButton);
@@ -80,7 +87,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         saveTeam = (Button)findViewById(R.id.saveTeam);
         savePlayer = (Button)findViewById(R.id.savePlayer);
 
-        //Initialize text
+        //Initialize all Text View
         teamName = (TextView)findViewById(R.id.teamName);
         player1Name = (TextView)findViewById(R.id.player1Name);
         player2Name = (TextView)findViewById(R.id.player2Name);
@@ -88,7 +95,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         player4Name = (TextView)findViewById(R.id.player4Name);
         player5Name = (TextView)findViewById(R.id.player5Name);
 
-        //Initialize all picture
+        //Initialize all Pictures
         player1Image = (ImageView)findViewById(R.id.player1Image);
         player2Image = (ImageView)findViewById(R.id.player2Image);
         player3Image = (ImageView)findViewById(R.id.player3Image);
@@ -96,7 +103,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         player5Image = (ImageView)findViewById(R.id.player5Image);
         teamLogo = (ImageView)findViewById(R.id.teamLogo);
 
-        //Initialize edit text
+        //Initialize all Edit Text
         editableTeamName = (EditText)findViewById(R.id.enterTeamName);
         editablePlayerName = (EditText)findViewById(R.id.enterPlayerName);
 
@@ -107,32 +114,36 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
         player3Stats.setOnClickListener(this);
         player4Stats.setOnClickListener(this);
         player5Stats.setOnClickListener(this);
-        playGame.setOnClickListener(this);
-        playerMenu.setOnClickListener(this);
-        saveTeam.setOnClickListener(this);
-        savePlayer.setOnClickListener(this);
 
-        //Set on click listeners for team buttons
+        //Set on click listeners for all buttons
         team1Name.setOnClickListener(this);
         team2Name.setOnClickListener(this);
         team3Name.setOnClickListener(this);
         team4Name.setOnClickListener(this);
         team5Name.setOnClickListener(this);
+        playGame.setOnClickListener(this);
+        playerMenu.setOnClickListener(this);
+        saveTeam.setOnClickListener(this);
+        savePlayer.setOnClickListener(this);
 
         //Create default database
         SoccerDB.createDefaultDatabase();
 
-        //Set all the data on the page
+        //Set all the data on the page initially to the Kittenz team
         setTeamButtons();
         setPlayerInfo("Kittenz");
 
     }//onCreate
 
-    //Sets all the information relating to the  player on the screen, including hiding the ones that
-    //aren't needed
+    //Sets all the information relating to the team name passed in. This includes showing/hiding the
+    //players on the given team.
     private void setPlayerInfo(String tempTeamName) {
+        //Sets team logo and text
         teamLogo.setBackgroundResource(SoccerDB.returnTeamLogo(tempTeamName));
         teamName.setText(tempTeamName);
+
+        //Determines how many players are on the team and sets the needed ones to visible and the
+        //not needed ones to hidden.
         ArrayList<SoccerPlayer> players = SoccerDB.getPlayers(tempTeamName);
         if (SoccerDB.getNumberOfPlayers(tempTeamName) == 0) {
             player1Name.setVisibility(View.GONE);
@@ -140,11 +151,13 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
+
             player1Image.setVisibility(View.GONE);
             player2Image.setVisibility(View.GONE);
             player3Image.setVisibility(View.GONE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+
             player1Stats.setVisibility(View.GONE);
             player2Stats.setVisibility(View.GONE);
             player3Stats.setVisibility(View.GONE);
@@ -158,6 +171,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
+
             int player1Im = (players.get(0).getPicture());
             player1Image.setBackgroundResource(player1Im);
             player1Image.setVisibility(View.VISIBLE);
@@ -165,6 +179,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setVisibility(View.GONE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+
             player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.GONE);
             player3Stats.setVisibility(View.GONE);
@@ -180,6 +195,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.GONE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
+
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
             player1Image.setBackgroundResource(player1Im);
@@ -189,6 +205,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setVisibility(View.GONE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+
             player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.VISIBLE);
             player3Stats.setVisibility(View.GONE);
@@ -206,6 +223,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.VISIBLE);
             player4Name.setVisibility(View.GONE);
             player5Name.setVisibility(View.GONE);
+
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
             int player3Im = (players.get(2).getPicture());
@@ -217,6 +235,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setVisibility(View.VISIBLE);
             player4Image.setVisibility(View.GONE);
             player5Image.setVisibility(View.GONE);
+
             player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.VISIBLE);
             player3Stats.setVisibility(View.VISIBLE);
@@ -236,6 +255,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.VISIBLE);
             player4Name.setVisibility(View.VISIBLE);
             player5Name.setVisibility(View.GONE);
+
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
             int player3Im = (players.get(2).getPicture());
@@ -249,6 +269,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setVisibility(View.VISIBLE);
             player4Image.setVisibility(View.VISIBLE);
             player5Image.setVisibility(View.GONE);
+
             player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.VISIBLE);
             player3Stats.setVisibility(View.VISIBLE);
@@ -270,6 +291,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Name.setVisibility(View.VISIBLE);
             player4Name.setVisibility(View.VISIBLE);
             player5Name.setVisibility(View.VISIBLE);
+
             int player1Im = (players.get(0).getPicture());
             int player2Im = (players.get(1).getPicture());
             int player3Im = (players.get(2).getPicture());
@@ -285,16 +307,17 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             player3Image.setVisibility(View.VISIBLE);
             player4Image.setVisibility(View.VISIBLE);
             player5Image.setVisibility(View.VISIBLE);
+
             player1Stats.setVisibility(View.VISIBLE);
             player2Stats.setVisibility(View.VISIBLE);
             player3Stats.setVisibility(View.VISIBLE);
             player4Stats.setVisibility(View.VISIBLE);
             player5Stats.setVisibility(View.VISIBLE);
         }
-    }
+    }//setPlayerInfo
 
-    //Sets all the team buttons on the screen if there is less than 5 teams the team buttons
-    //are hidden
+    //Determines how many teams there are and sets the needed ones to visible and the
+    //not needed ones to hidden.
     private void setTeamButtons() {
         ArrayList<String> teams = SoccerDB.getListOfTeamNames();
         if (SoccerDB.getNumberOfTeams() == 2){
@@ -328,36 +351,58 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             team4Name.setVisibility(View.VISIBLE);
             team5Name.setVisibility(View.VISIBLE);
         }
-    }
+    }//setTeamButtons
 
     @Override
+    //Function to handle all the button clicks associated with this activity
     public void onClick(View view) {
         if (view == playGame) {
+            //If the Play Game button is picked the third activity is loaded
             startActivity(new Intent(first_activity.this, third_activity.class));
         }else if (view == playerMenu) {
+            //If the Player Menu button is picked the second activity is loaded
             startActivity(new Intent(first_activity.this, second_activity.class));
         }else if (view == team1Name){
+            //If the first team button is clicked, changes the player info to that team
             setPlayerInfo((String) team1Name.getText());
         }else if (view == team2Name){
+            //If the second team button is clicked, changes the player info to that team
             setPlayerInfo((String)team2Name.getText());
         }else if (view == team3Name){
+            //If the third team button is clicked, changes the player info to that team
             setPlayerInfo((String) team3Name.getText());
         }else if (view == team4Name){
+            //If the fourth team button is clicked, changes the player info to that team
             setPlayerInfo((String) team4Name.getText());
         }else if (view == team5Name){
+            //If the fifth team button is clicked, changes the player info to that team
             setPlayerInfo((String) team5Name.getText());
         }else if (view == saveTeam){
-            String str = editableTeamName.getText().toString();
-            SoccerDB.addTeam(str);
-            setTeamButtons();
-            setPlayerInfo(str);
+            //If the Save Team button is clicked a new team is added, the team buttons are updated
+            //and the new team info is loaded. If 5 teams exists or team with the same name exists
+            //no new team is added.
+            if (SoccerDB.getNumberOfTeams() < 5) {
+                String str = editableTeamName.getText().toString();
+                if (!SoccerDB.isTeam(str)){
+                    SoccerDB.addTeam(str);
+                    setTeamButtons();
+                    setPlayerInfo(str);
+                }
+            }
         }else if (view == savePlayer) {
+            //If the Save Player Button is clicked a new player is added, to the team that is currently
+            // loaded, if there isn't a player with that name already in the database
             String str = editablePlayerName.getText().toString();
+            if (str.indexOf(" ") == -1){
+                str = str + " ";
+            }
             if (!SoccerDB.isPlayer(str)){
                 SoccerDB.addPlayer(str, teamName.getText().toString());
                 setPlayerInfo(teamName.getText().toString());
             }
         }else {
+            //If any other button is clicked then a popup will be generated with stats corresponding
+            //to the button clicked
             LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
             //Opens up the type of popup corresponding to the button clicked
@@ -372,6 +417,8 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                     view == player4Stats || view == player5Stats || view == teamStats) {
                 String playerName = "";
                 String tempTeamName = "";
+
+                //Set Player name or Team name depending on button clicked
                 if (view == player1Stats){
                     playerName = (String) player1Name.getText();
                 }else if (view == player2Stats){
@@ -386,6 +433,7 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                     tempTeamName = (String) teamName.getText();
                 }
 
+                //Initilize all Edit Text and title on popup
                 EditText goals = (EditText)popupView.findViewById(R.id.goalsValue);
                 EditText goalssaved = (EditText)popupView.findViewById(R.id.goalsSavedValue);
                 EditText assists = (EditText)popupView.findViewById(R.id.assistsValue);
@@ -394,6 +442,8 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
                 EditText redcards = (EditText)popupView.findViewById(R.id.redCardsValue);
                 EditText position = (EditText)popupView.findViewById(R.id.posistionValue);
                 TextView title = (TextView)popupView.findViewById(R.id.statsPopupTitle);
+
+                //Set information based on if player or team
                 if (tempTeamName.equals("")){
                     SoccerPlayer player = SoccerDB.getPlayer(playerName);
                     title.setText(playerName);
@@ -430,7 +480,4 @@ public class first_activity extends AppCompatActivity implements View.OnClickLis
             });
         }
     }//onClick
-
-
-
 }//first_activity
