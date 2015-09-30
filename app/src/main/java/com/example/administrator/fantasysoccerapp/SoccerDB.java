@@ -216,17 +216,71 @@ public class SoccerDB {
     public static String chooseWinner(String teamOne, String teamTwo) {
 
         //Declare the teams of the winning team and losing team
-        SoccerTeam winningTeam;
-        SoccerTeam losingTeam;
+        SoccerTeam winningTeam = null;
+        SoccerTeam losingTeam  = null;
 
-        //Decide a winner randomly and set the teams according to who won and lost
-        double randomNumber = Math.random();
-        if (randomNumber < 0.5) {
+        //Declare and initialize variables to track which team is better
+        int teamOneBetter = 0;
+        int teamTwoBetter = 0;
+
+        //Create a temporary team for both to get the stats
+        SoccerTeam tempTeamOne = getTeam(teamOne);
+        SoccerTeam tempTeamTwo = getTeam(teamTwo);
+
+        //Figure out who has more goals scored, if equal do nothing
+        if (tempTeamOne.getGoalsScored() > tempTeamTwo.getGoalsScored()){
+            teamOneBetter++;
+        }else if (tempTeamTwo.getGoalsScored() > tempTeamOne.getGoalsScored()){
+            teamTwoBetter++;
+        }
+
+        //Figure out who has more goals saved, if equal do nothing
+        if (tempTeamOne.getGoalsSaved() > tempTeamTwo.getGoalsSaved()){
+            teamOneBetter++;
+        }else if (tempTeamTwo.getGoalsSaved() > tempTeamOne.getGoalsSaved()){
+            teamTwoBetter++;
+        }
+
+        //Figure out who has more fouls, if equal do nothing
+        if (tempTeamOne.getFouls() > tempTeamTwo.getFouls()){
+            teamOneBetter++;
+        }else if (tempTeamTwo.getFouls() > tempTeamOne.getFouls()){
+            teamTwoBetter++;
+        }
+
+        //Figure out who has more yellow cards, if equal do nothing
+        if (tempTeamOne.getYellowCards() > tempTeamTwo.getYellowCards()){
+            teamOneBetter++;
+        }else if (tempTeamTwo.getYellowCards() > tempTeamOne.getYellowCards()){
+            teamTwoBetter++;
+        }
+
+        //Figure out who has more red cards, if equal do nothing
+        if (tempTeamOne.getRedCards() > tempTeamTwo.getRedCards()){
+            teamOneBetter++;
+        }else if (tempTeamTwo.getRedCards() > tempTeamOne.getRedCards()){
+            teamTwoBetter++;
+        }
+
+        //Determine which team is better, if equal do nothing
+        if (teamOneBetter > teamTwoBetter){
             winningTeam = getTeam(teamOne);
             losingTeam = getTeam(teamTwo);
-        } else {
+        }else if (teamTwoBetter > teamOneBetter){
             winningTeam = getTeam(teamTwo);
             losingTeam = getTeam(teamOne);
+        }
+
+        //Decide a winner randomly if no team has stats
+        if (winningTeam == null || losingTeam == null){
+            double randomNumber = Math.random();
+            if (randomNumber < 0.5) {
+                winningTeam = getTeam(teamOne);
+                losingTeam = getTeam(teamTwo);
+            } else {
+                winningTeam = getTeam(teamTwo);
+                losingTeam = getTeam(teamOne);
+            }
         }
 
         //Get list of both teams players

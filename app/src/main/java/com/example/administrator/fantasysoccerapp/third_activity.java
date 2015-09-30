@@ -6,6 +6,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Jordan Goldey
@@ -60,6 +63,10 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
 
     //Declare an Arraylist of the team names
     ArrayList <String> teams;
+
+    //Declare an Arraylist of the image buttons
+    ArrayList<ImageButton> team1Buttons = new ArrayList<>();
+    ArrayList<ImageButton> team2Buttons = new ArrayList<>();
 
     //Delclare and initialize variables for keeping track of what information is set on the activity
     String teamOneSelected = "";
@@ -112,6 +119,18 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
             team1Positions[i] = "";
             team2Positions[i] = "";
         }
+
+        //Initialize the array of Image Buttons
+        team1Buttons.add(team1Defense1);
+        team1Buttons.add(team1Defense2);
+        team1Buttons.add(team1Forward1);
+        team1Buttons.add(team1Forward2);
+        team1Buttons.add(team1Goalie);
+        team2Buttons.add(team2Defense1);
+        team2Buttons.add(team2Defense2);
+        team2Buttons.add(team2Forward1);
+        team2Buttons.add(team2Forward2);
+        team2Buttons.add(team2Goalie);
 
         //Call methods to populate dropdowns
         populateTeamOneDropdown();
@@ -276,6 +295,20 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
             //finish the activity if the goBack button is clicked
             finish();
         }else if (view == playGame){
+
+            //Once play game is pushed the players on the board move around to random spots
+            for(int i = 0; i < team1Buttons.size(); i++){
+                int xMove = (int)(Math.random() * (1900) + 1);
+                int yMove = (int)(Math.random() * (1000) + 1);
+                team1Buttons.get(i).animate().x(xMove).y(yMove).setDuration(5000).start();
+            }
+            for(int i = 0; i < team2Buttons.size(); i++){
+                int xMove = (int)(Math.random() * (1900) + 1);
+                int yMove = (int)(Math.random() * (1000) + 1);
+                team2Buttons.get(i).animate().x(xMove).y(yMove).setDuration(5000).start();
+            }
+
+
             //If the play game button is pushed make sure that team one and team two are not the
             //same. Next check if all the positions on both teams are filled. Next check if all the
             //positions on both teams have unique players and that one player isn't playing two
@@ -319,9 +352,9 @@ public class third_activity extends AppCompatActivity implements View.OnClickLis
                         final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-                        //Fills in the title with who won 
+                        //Fills in the title with who won
                         TextView title = (TextView) popupView.findViewById(R.id.wonPopupText);
-                        String winner = SoccerDB.chooseWinner(teamOneSelected,teamTwoSelected);
+                        String winner = SoccerDB.chooseWinner(teamOneSelected, teamTwoSelected);
                         title.setText(winner + " Won!!!!!");
 
                         //Dismisses the popup when the cancel button is clicked
